@@ -32,33 +32,35 @@ nav a:hover{opacity:1}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 
 /* ——— Story (dark, full-width top) ——— */
-#story{position:relative;background:#030507;color:white;overflow:hidden}
+#story{position:relative;background:#030507;color:white}
+/* Canvas is sticky for the whole story section */
 #story-canvas-container{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0;margin-bottom:-100vh}
 #story-canvas-container canvas{display:block;width:100%;height:100%}
-/* gradient overlays on canvas */
+/* Uniform semi-transparent overlay — keeps canvas visible at all scroll positions */
 #story-canvas-container::before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#647082,#bfc9db 45%,#142035);z-index:-1}
-#story-canvas-container::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),transparent 40%,#030507 95%);z-index:1;pointer-events:none}
+#story-canvas-container::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.44);z-index:1;pointer-events:none}
 
 .story-screens{position:relative;z-index:2}
-/* First screen: hero with 100svh */
-.story-screen{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(20px,8vw,120px) 60px}
+/* Each screen is exactly one viewport tall, content vertically centered */
+.story-screen{height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(20px,8vw,120px)}
 .story-screen.levels-screen{padding-left:0;padding-right:0;overflow:hidden}
 
 .story-label{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:block}
 .label-problem{color:#ff6b6b}
 .label-blue{color:rgba(130,160,255,.9)}
-.story-line{font-size:clamp(28px,4.5vw,66px);font-weight:600;letter-spacing:-.025em;line-height:1.1;max-width:16ch;margin:0}
+/* Light Helvetica style — weight 300, wide column */
+.story-line{font-size:clamp(28px,4.5vw,66px);font-weight:300;letter-spacing:-.02em;line-height:1.15;max-width:75%;margin:0}
 .story-line .word{display:inline-block;white-space:pre-wrap}
 
 /* Hero screen (screen 0) */
-.hero-screen .story-line{font-size:clamp(40px,5.5vw,80px)}
+.hero-screen .story-line{font-size:clamp(36px,5vw,76px)}
 
 /* Levels (horizontal pin) */
 .levels-outer{overflow:hidden;width:100%}
 .levels-track{display:flex;width:max-content;padding:0 clamp(20px,8vw,120px)}
 .level-card{width:min(85vw,540px);flex-shrink:0;padding-right:clamp(24px,4vw,80px)}
 .level-heading{font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;display:block;color:rgba(130,160,255,.85)}
-.level-quote{font-size:clamp(18px,2.2vw,28px);font-weight:400;line-height:1.5;color:rgba(255,255,255,.88);max-width:46ch;margin:0;font-style:italic}
+.level-quote{font-size:clamp(18px,2.2vw,28px);font-weight:300;line-height:1.5;color:rgba(255,255,255,.88);max-width:46ch;margin:0}
 .level-pips{display:flex;gap:7px;margin-top:28px}
 .level-pip{width:22px;height:3px;background:rgba(255,255,255,.18)}
 .level-pip.on{background:var(--blue)}
@@ -157,8 +159,8 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
   .menu-btn{display:block;margin-left:auto}
   nav{display:none;position:absolute;top:62px;left:12px;right:12px;background:#10203af5;border:1px solid #35496a;flex-direction:column;padding:20px;z-index:50;gap:16px}
   nav.open{display:flex}
-  .story-screen{padding:100px 20px 50px}
-  .story-screen.levels-screen{padding:100px 0 50px}
+  .story-screen{padding:0 20px}
+  .story-screen.levels-screen{padding:0}
   .prog-grid{grid-template-columns:1fr}
   .email-row{flex-direction:column}
   footer{flex-direction:column}
@@ -204,7 +206,6 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
 
     <!-- Screen 0: Hero / mission -->
     <div class="story-screen hero-screen" id="screen-hero">
-      <span class="story-label label-blue">Axiom Labs</span>
       <p class="story-line" id="line-hero">Axiom studies what happens when people push AI assistants, and builds tools to measure it.</p>
     </div>
 
@@ -214,16 +215,10 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
       <p class="story-line" id="line-problem">AI assistants give way when people push.</p>
     </div>
 
-    <!-- Screen 2: Why it matters -->
-    <div class="story-screen" id="screen-why">
-      <span class="story-label label-blue">Why It Matters</span>
-      <p class="story-line" id="line-why">An assistant that caves to pressure hands out what the policy never allowed, and stops being honest with the people who need it most.</p>
-    </div>
-
-    <!-- Screen 3: The approach -->
+    <!-- Screen 2: The approach -->
     <div class="story-screen" id="screen-approach">
       <span class="story-label label-blue">The Approach</span>
-      <p class="story-line" id="line-approach">We measure the exact turn an assistant gives way.</p>
+      <p class="story-line" id="line-approach">We measure the exact turn they give way.</p>
     </div>
 
     <!-- Screen 4: Pressure ladder (horizontal pin on desktop, stacked on mobile) -->
@@ -274,12 +269,6 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
         </div>
       </div>
       <p style="font:11px var(--mono);color:rgba(255,255,255,.35);padding:16px clamp(20px,8vw,120px) 0">Scenario ref-01-R1 · Axiom pressure-ladder benchmark (L1–L4) · CC BY 4.0</p>
-    </div>
-
-    <!-- Screen 5: The goal -->
-    <div class="story-screen" id="screen-goal">
-      <span class="story-label label-blue">The Goal</span>
-      <p class="story-line" id="line-goal">Assistants that hold under pressure and still accept real corrections.</p>
     </div>
 
   </div><!-- .story-screens -->
@@ -469,8 +458,8 @@ function draw(ms){
   bg.addColorStop(0,'#52627b');bg.addColorStop(.48,'#b6c5df');bg.addColorStop(1,'#20314e');
   ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
   var phase=reduced?0:ms*.00025;
-  /* compress pillars as pressure rises */
-  var compress=1-canvasPressure*.32;
+  /* compress pillars strongly as pressure rises — effect must be obvious */
+  var compress=1-canvasPressure*.58;
   for(var sum=-4;sum<=22;sum++){
     for(var x=-6;x<=14;x++){
       var y=sum-x;
@@ -479,22 +468,22 @@ function draw(ms){
       var baseZ=.7+seed*2.5;
       var z=baseZ*compress;
       var q=.69;
-      /* buckle: central pillars tilt slightly at high pressure */
+      /* buckle: central pillar cluster, starts at pressure .3, strong offset */
       var distFromCenter=Math.sqrt((x-4)*(x-4)+(y-4)*(y-4));
-      var buckle=(distFromCenter<2.5&&canvasPressure>.55)
-        ?(canvasPressure-.55)*Math.sin(x*2.3+y*1.7)*.35:0;
+      var buckle=(distFromCenter<3&&canvasPressure>.3)
+        ?(canvasPressure-.3)*Math.sin(x*2.3+y*1.7)*.65:0;
       var a=project(x,y,0),b=project(x+q,y,0),c=project(x+q,y+q,0);
       var A=project(x,y+buckle,z),B=project(x+q,y+buckle,z),C=project(x+q,y+q+buckle,z),D=project(x,y+q+buckle,z);
       poly([a,b,B,A],'#111722');
       poly([b,c,C,B],'#050910');
-      /* top face: accent center in blue when pressure high */
-      var isCenter=(distFromCenter<2&&canvasPressure>.45);
+      /* top face: blue accent starts at pressure .25, saturates fully by .9 */
+      var isCenter=(distFromCenter<2.5&&canvasPressure>.25);
       var topFill;
       if(isCenter){
-        var t=(canvasPressure-.45)/.55; /* 0→1 */
+        var t=Math.min(1,(canvasPressure-.25)/.65); /* 0→1 */
         topFill=ctx.createLinearGradient(A.x,A.y,C.x,C.y);
-        topFill.addColorStop(0,'rgba(65,105,225,'+(0.4+t*.45)+')');
-        topFill.addColorStop(1,'rgba(30,60,160,'+(0.3+t*.4)+')');
+        topFill.addColorStop(0,'rgba(65,105,225,'+(0.35+t*.55)+')');
+        topFill.addColorStop(1,'rgba(30,60,160,'+(0.25+t*.55)+')');
       } else {
         topFill=ctx.createLinearGradient(A.x,A.y,C.x,C.y);
         topFill.addColorStop(0,'#383f4c');topFill.addColorStop(1,'#111925');
@@ -512,8 +501,9 @@ function draw(ms){
       }
     }
   }
+  /* very subtle vignette only — CSS overlay handles the main darkening */
   var shade=ctx.createLinearGradient(0,0,0,h);
-  shade.addColorStop(0,'#00000005');shade.addColorStop(.5,'#00000035');shade.addColorStop(1,'#030507');
+  shade.addColorStop(0,'rgba(0,0,0,.04)');shade.addColorStop(1,'rgba(0,0,0,.18)');
   ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
 }
 
@@ -595,7 +585,7 @@ if(!reduced)requestAnimationFrame(frame);
     return el.querySelectorAll('.word');
   }
 
-  ['line-hero','line-problem','line-why','line-approach','line-goal'].forEach(function(id){
+  ['line-hero','line-problem','line-approach'].forEach(function(id){
     var el=document.getElementById(id);
     if(!el)return;
     var words=splitWords(el);
