@@ -1,0 +1,159 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark Methodology · Axiom Labs</title>
+<meta name="description" content="Structure and design of the Axiom Benchmarks v1.2.0 pressure-ladder dataset for customer-service AI evaluation.">
+<meta property="og:title" content="Benchmark Methodology · Axiom Labs">
+<meta property="og:description" content="Structure and design of the Axiom Benchmarks v1.2.0 pressure-ladder dataset.">
+<meta property="og:site_name" content="Axiom Labs">
+<!-- TODO(naren): add og:image="..." and twitter:image="..." when brand asset is ready -->
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{--blue:#4169e1;--ink:#202124;--paper:#f6f6f3}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:300;color:var(--ink);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}.progress{height:3px;background:var(--blue);position:fixed;left:0;top:0;width:0;z-index:20}.section{padding:40px 18px}.label{display:flex;align-items:center;gap:9px;margin-bottom:24px;font:16px ui-monospace,Consolas,monospace}.number{width:36px;height:36px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center}.tag{border:1px solid currentColor;border-radius:2px;padding:7px 12px}.section h2{font-weight:300;font-size:clamp(31px,3.1vw,51px);line-height:1.12;letter-spacing:-.045em;margin:0 0 25px}
+.bibtex{font:13px/1.65 ui-monospace,monospace;color:#586174;background:var(--paper);border:1px solid #c8cdd8;padding:18px 22px;overflow-x:auto;white-space:pre;display:block;margin:0}
+.bibtex-note{font:11px ui-monospace,monospace;color:#65718e;margin-top:6px}
+.status{display:inline-block;font:11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border:1px solid;vertical-align:middle;margin-left:6px}
+.status-released{color:#16a34a;border-color:#16a34a44}
+.status-upcoming{color:#ca8a04;border-color:#ca8a0444}
+.status-roadmap{color:#6b7280;border-color:#6b728044}
+.rl-link{font:13px ui-monospace,monospace;color:var(--blue)}.rl-link:hover{text-decoration:underline}
+.cta{display:inline-flex;align-items:center;gap:28px;background:#202124;color:white;padding:14px 16px;font:15px ui-monospace,monospace;border:none;cursor:pointer;text-decoration:none}.cta .arrow{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:white;color:#202124;flex-shrink:0}
+.bm-page-header{background:#030507;color:white;padding:26px 24px;display:flex;align-items:center;gap:55px;position:sticky;top:0;z-index:10}
+.mark{display:flex;gap:5px;width:34px}.mark i{height:29px;width:12px;border:3px solid white;transform:skew(-17deg)}
+nav{display:flex;gap:25px;font-size:17px;font-weight:400}.wordmark{margin-left:auto;font-size:27px;font-weight:750;letter-spacing:-1.3px}.wordmark small{font-size:12px;letter-spacing:1.5px;margin-left:7px;font-weight:400}
+.menu{display:none;background:none;color:white;border:1px solid #ffffff66;padding:8px 12px;font:13px inherit;cursor:pointer}
+.bm-back{font:12px ui-monospace,monospace;color:#8b9ab5;padding:16px 0;display:inline-block}.bm-back:hover{color:white}
+.bm-dl{max-width:900px;margin:0 auto}
+.bm-dl dt{font:12px ui-monospace,monospace;color:#65718e;text-transform:uppercase;letter-spacing:.06em;margin-top:20px;margin-bottom:4px}
+.bm-dl dd{margin:0 0 2px;font-size:16px;line-height:1.6;color:#374151;padding-left:16px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
+@media(max-width:850px){header{padding:22px 18px;gap:20px}.wordmark{font-size:22px;margin-left:0}.mark{display:none}.menu{display:block;margin-left:auto}nav{display:none;position:absolute;top:78px;left:12px;right:12px;background:#10203af5;border:1px solid #35496a;flex-direction:column;padding:22px;z-index:20}nav.open{display:flex}.bm-page-header{position:sticky;top:0},.section{padding:32px 16px}.bibtex{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+<div class="progress" id="progress"></div>
+
+<header class="bm-page-header">
+  <a class="mark" href="/" aria-label="Axiom home"><i></i><i></i></a>
+  <button class="menu" aria-controls="bm-nav" aria-expanded="false">Menu</button>
+  <nav id="bm-nav">
+    <a href="/#about">About</a>
+    <a href="/#research">Research</a>
+    <a href="/#program">Program</a>
+    <a href="/#people">People</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+  <a class="wordmark" href="/">AXIOM<small>LABS</small></a>
+</header>
+
+<main style="max-width:900px;margin:0 auto;padding:0 20px 100px">
+
+  <a class="bm-back" href="/">&#8592; Back to axiomresearch.dev</a>
+
+  <h1 style="font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.04em;margin:16px 0 12px">Benchmark Methodology</h1>
+  <p style="font-size:18px;color:#586174;margin:0 0 48px">Axiom Benchmarks v1.2.0 &middot; November 2026</p>
+
+  <!-- Dataset structure -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">1</span><span class="tag">Dataset Structure</span></div>
+    <dl class="bm-dl">
+      <dt>Policies</dt>
+      <dd>15 policies across five customer-service domains</dd>
+      <dd>5 policies held out for a sealed test split (unreleased)</dd>
+      <dd>10 policies used for the 75 published scenarios</dd>
+
+      <dt>Scenarios (published)</dt>
+      <dd>75 total, organized as:</dd>
+      <dd>&middot; 45 pressure-ladder runs (L1&ndash;L4 escalation)</dd>
+      <dd>&middot; 15 valid-correction runs</dd>
+      <dd>&middot; 15 policy-change runs</dd>
+
+      <dt>Phrasing balance</dt>
+      <dd>Approximately balanced per ladder level</dd>
+
+      <dt>Example scenario identifier</dt>
+      <dd>ref-01-R1</dd>
+
+      <dt>License</dt>
+      <dd>CC BY 4.0</dd>
+    </dl>
+  </section>
+
+  <!-- Pressure ladder -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">2</span><span class="tag">Pressure Ladder</span></div>
+    <ul style="font-size:16px;line-height:1.7;color:#374151;padding-left:20px;max-width:680px">
+      <li>Four escalating pressure levels: L1&ndash;L4</li>
+      <li>Each level applies increasing social and rhetorical pressure to the assistant</li>
+      <li>A run ends when the assistant concedes or holds through L4</li>
+    </ul>
+    <p style="margin-top:20px;color:#65718e;font-style:italic;font-size:15px">Coming with the December release: full level definitions.</p>
+  </section>
+
+  <!-- Scoring and judging -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">3</span><span class="tag">Scoring &amp; Judging</span></div>
+    <!-- TODO(naren): describe judging procedure (Lemma rule engine / human review) -->
+    <p style="color:#65718e;font-style:italic;font-size:16px">Coming with the December release.</p>
+  </section>
+
+  <!-- Results -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">4</span><span class="tag">Results</span></div>
+    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:620px;margin:0 0 20px">The benchmark results viewer shows per-model scores on the published scenarios.</p>
+    <!-- BENCHMARK_LINKS -->
+    <a class="cta" href="https://github.com/axiom-csc/axiom-benchmarks" hidden>View current results <span class="arrow">&#8599;</span></a>
+    <!-- /BENCHMARK_LINKS -->
+    <a class="rl-link" href="../">Back to axiomresearch.dev &rarr;</a>
+  </section>
+
+  <!-- Citation -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">5</span><span class="tag">Citation</span></div>
+    <pre class="bibtex" data-lenis-prevent>@dataset{axiom_benchmarks_v1_2_0,
+  title   = {Axiom Benchmarks v1.2.0},
+  author  = {Saravanan, Naren},
+  year    = {2026},
+  month   = {November},
+  url     = {/* repository goes public with the December release */},
+  note    = {15 policies across five customer-service domains;
+             75 published scenarios; CC BY 4.0}
+}</pre>
+    <p class="bibtex-note">Repository goes public with the December release.</p>
+  </section>
+
+  <!-- License -->
+  <section class="section" style="padding-left:0;padding-right:0">
+    <div class="label"><span class="number">6</span><span class="tag">License</span></div>
+    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:680px">The published scenarios are released under CC BY 4.0. The 5 held-out test policies and their scenarios are not part of the public release.</p>
+  </section>
+
+</main>
+
+<footer style="padding:30px 20px 35px;background:#111827;color:#9ba9c5;display:flex;justify-content:space-between;gap:20px;font-size:11px;line-height:1.6">
+  <span>AXIOM LABS<br>Research-led model development</span>
+  <span>Original generative artwork. &middot; axiomresearch.dev</span>
+</footer>
+
+<script>
+const menu=document.querySelector('.menu'),nav=document.getElementById('bm-nav');
+if(menu&&nav){menu.addEventListener('click',()=>{let on=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(on))});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}))}
+addEventListener('scroll',()=>{if(window.lenis)return;const d=document.documentElement;const p=document.getElementById('progress');if(p)p.style.width=(100*d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight))+'%'},{passive:true});
+</script>
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
+<script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof Lenis === 'undefined') return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var headerEl = document.querySelector('.bm-page-header');
+  var headerH = headerEl ? headerEl.offsetHeight : 78;
+  window.lenis = new Lenis({
+    autoRaf: true,
+    lerp: 0.1,
+    anchors: { offset: -headerH }
+  });
+  var progressEl = document.getElementById('progress');
+  window.lenis.on('scroll', function(e) {
+    if (progressEl) progressEl.style.width = (e.progress * 100) + '%';
+  });
+  document.documentElement.style.scrollBehavior = 'auto';
+});
+</script>
+</body></html>
