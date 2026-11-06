@@ -9,9 +9,6 @@
 <meta property="og:site_name" content="Axiom Labs">
 <meta property="og:url" content="https://axiomresearch.dev/">
 <meta name="twitter:card" content="summary">
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <style>
 /* ——— Tokens ——— */
 :root{
@@ -131,7 +128,7 @@ nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bott
 .thesis-right p:last-child{margin-bottom:0}
 
 /* ——— Manam section ——— */
-#manam{background:#0a0c14;position:relative;overflow:hidden;min-height:80vh}
+#manam{background:#0a0c14;padding:72px clamp(16px,4vw,80px) 80px;color:white}
 .manam-bg{
   position:absolute;inset:0;z-index:0;
   background:linear-gradient(135deg,#0a0c14 0%,#101428 100%)
@@ -147,11 +144,13 @@ nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bott
   font-size:clamp(28px,4vw,52px);font-weight:400;letter-spacing:-.03em;
   color:white;margin:0 0 56px;line-height:1.1
 }
-.manam-halves{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.manam-halves{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .manam-panel{
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  border-radius:4px;overflow:hidden
+  border-radius:4px;overflow:hidden;
+  opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s
 }
+.manam-panel.visible{opacity:1;transform:translateY(0)}
 .manam-panel-shader{
   height:160px;position:relative;overflow:hidden;
   background:rgba(10,12,20,.8)
@@ -170,7 +169,7 @@ nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bott
 }
 .manam-panel-status{
   display:inline-block;font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 8px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.45)
+  color:rgba(255,255,255,.45)
 }
 
 /* ——— Agenda ——— */
@@ -332,6 +331,7 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
   .rt-date{padding-top:0}
   .rt-authors{display:none}
   .manam-halves{grid-template-columns:1fr}
+  .manam-panel{transition-delay:0s!important}
   .thesis-row{grid-template-columns:1fr;gap:28px}
   .thesis-right{border-left:none;padding-left:0;border-top:1px solid var(--rule);padding-top:28px}
 }
@@ -359,58 +359,10 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .pmap-turn{opacity:1!important;transform:none!important;transition:none!important}
+  .manam-panel{opacity:1!important;transform:none!important;transition:none!important}
 }
 
-/* ——— Manam 3D scene ——— */
-.manam-scene{position:relative;background:#0a0c14;overflow:hidden;min-height:100vh}
-.manam-scroll-spacer{height:150vh}
-.manam-3d-container{
-  position:sticky;top:0;width:100%;height:100vh;
-  z-index:2;pointer-events:none
-}
-.manam-3d-container canvas{width:100%!important;height:100%!important}
-.manam-labels{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  pointer-events:none;z-index:10
-}
-.ml-title{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  font-size:clamp(22px,3vw,42px);font-weight:400;letter-spacing:-.025em;
-  color:white;text-align:center;
-  opacity:0;transition:opacity .6s;white-space:nowrap
-}
-.ml-title.vis{opacity:1}
-.ml-sub{color:rgba(255,255,255,.55);font-size:.65em}
-.ml-cluster{
-  position:absolute;opacity:0;transition:opacity .6s;
-  display:flex;flex-direction:column;gap:4px;pointer-events:none
-}
-.ml-cluster.vis{opacity:1}
-.ml-name{font-size:18px;font-weight:400;letter-spacing:-.02em;color:white}
-.ml-desc{font-size:13px;color:rgba(255,255,255,.6);max-width:20ch}
-.ml-status{font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.manam-static-fallback{
-  display:none;padding:60px 40px;background:#0a0c14;color:white
-}
-.manam-static-fallback svg{max-width:400px;width:100%}
-@media(prefers-reduced-motion:reduce){
-  .manam-3d-container,.manam-scroll-spacer,.manam-labels{display:none!important}
-  .manam-static-fallback{display:block!important}
-}
-.manam-settled{
-  position:relative;z-index:5;
-  padding:20px clamp(16px,4vw,80px);
-  background:#0a0c14;display:none
-}
-.manam-scene .section-label{
-  position:absolute;top:24px;left:clamp(16px,4vw,80px);
-  color:rgba(185,180,230,.7);z-index:20
-}
-@media(max-width:768px){
-  .manam-scroll-spacer{height:60vh}
-  .ml-cluster{font-size:90%}
-}
+#manam .section-label{color:rgba(185,180,230,.7)}
 </style>
 </head>
 <body>
@@ -467,74 +419,54 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
 </section>
 
 <!-- ============================================================
-     MANAM — scroll-driven 3D architecture reveal
+     MANAM
      ============================================================ -->
-<section id="manam" class="manam-scene">
-  <!-- MeshGradient full-bleed bg (behind Three.js canvas) -->
-  <div id="manam-mesh-bg" class="manam-bg" aria-hidden="true"></div>
-
+<section id="manam">
   <span class="section-label">| MANAM</span>
-
-  <!-- Three.js canvas container (sticky) -->
-  <div id="manam-3d" class="manam-3d-container" aria-hidden="true"></div>
-
-  <!-- HTML label overlays -->
-  <div id="manam-labels" class="manam-labels" aria-live="polite">
-    <div class="ml-title" id="ml-title">Manam<span class="ml-sub"> — one mind, two halves.</span></div>
-    <div class="ml-cluster" id="ml-lemma" aria-hidden="true">
-      <span class="ml-name">Lemma</span>
-      <span class="ml-desc">Judges what happened.</span>
-      <span class="ml-status">In development</span>
+  <h2 class="manam-title">One mind, two halves.</h2>
+  <div class="manam-halves">
+    <div class="manam-panel">
+      <div class="manam-panel-shader" id="manam-lemma-shader"></div>
+      <div class="manam-panel-body">
+        <p class="manam-panel-name">Lemma</p>
+        <p class="manam-panel-desc">Behavioral model. Reads the conversation and judges when a model gave way to pressure.</p>
+        <span class="manam-panel-status">In development</span>
+      </div>
     </div>
-    <div class="ml-cluster" id="ml-noema" aria-hidden="true">
-      <span class="ml-name">Noema</span>
-      <span class="ml-desc">Models what happens next.</span>
-      <span class="ml-status">Early research</span>
+    <div class="manam-panel">
+      <div class="manam-panel-shader" id="manam-noema-shader"></div>
+      <div class="manam-panel-body">
+        <p class="manam-panel-name">Noema</p>
+        <p class="manam-panel-desc">Understanding model. Studies why caving happens and forecasts pressure ahead of it.</p>
+        <span class="manam-panel-status">Early research</span>
+      </div>
     </div>
-    <div class="ml-cluster" id="ml-spine-label" aria-hidden="true">
-      <span class="ml-name">Spine</span>
-      <span class="ml-desc">The caving signal inside a model.</span>
-      <span class="ml-status">Early research</span>
+    <div class="manam-panel">
+      <div class="manam-panel-shader" id="manam-spine-shader"></div>
+      <div class="manam-panel-body">
+        <p class="manam-panel-name">Spine</p>
+        <p class="manam-panel-desc">Interpretability. Finding the caving direction in model activations.</p>
+        <span class="manam-panel-status">Early research</span>
+      </div>
     </div>
-  </div>
-
-  <!-- Scroll spacer: provides room to scrub through animation -->
-  <div class="manam-scroll-spacer"></div>
-
-  <!-- Settled diagram (shown by JS at end of animation) -->
-  <div class="manam-settled" id="manam-settled" style="position:relative">
-    <svg viewBox="0 0 500 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Manam architecture key: Lemma, Noema, Spine" style="max-width:500px;width:100%;display:block">
-      <circle cx="80" cy="60" r="22" fill="#4a63d8" fill-opacity=".08" stroke="#4a63d8" stroke-width="1" stroke-opacity=".4"/>
-      <text x="80" y="88" text-anchor="middle" fill="#4a63d8" font-size="10" font-family="ui-monospace,monospace">Lemma</text>
-      <circle cx="420" cy="60" r="22" fill="#b9b4e6" fill-opacity=".08" stroke="#b9b4e6" stroke-width="1" stroke-opacity=".4"/>
-      <text x="420" y="88" text-anchor="middle" fill="#b9b4e6" font-size="10" font-family="ui-monospace,monospace">Noema</text>
-      <circle cx="250" cy="95" r="16" fill="#f0d98a" fill-opacity=".08" stroke="#f0d98a" stroke-width="1" stroke-opacity=".35"/>
-      <text x="250" y="119" text-anchor="middle" fill="#f0d98a" font-size="9" font-family="ui-monospace,monospace">Spine</text>
-      <line x1="102" y1="60" x2="398" y2="60" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="82" x2="238" y2="92" stroke="rgba(255,255,255,.07)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="420" y1="82" x2="262" y2="92" stroke="rgba(255,255,255,.07)" stroke-width="1" stroke-dasharray="4,4"/>
-    </svg>
-    <!-- LiquidMetal on Lemma node -->
-    <div id="lemma-settled-shader" style="position:absolute;width:44px;height:44px;border-radius:50%;overflow:hidden;left:calc(80/500*100%);top:calc(60/120*100%);transform:translate(-50%,-50%);pointer-events:none"></div>
-    <!-- GrainGradient on Noema node -->
-    <div id="noema-settled-shader" style="position:absolute;width:44px;height:44px;border-radius:50%;overflow:hidden;left:calc(420/500*100%);top:calc(60/120*100%);transform:translate(-50%,-50%);pointer-events:none"></div>
-  </div>
-
-  <!-- Static fallback: no WebGL / reduced-motion -->
-  <div class="manam-static-fallback" id="manam-fallback">
-    <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Manam architecture: Lemma, Noema, Spine">
-      <circle cx="80" cy="100" r="30" fill="#4a63d8" fill-opacity=".15" stroke="#4a63d8" stroke-width="1" stroke-opacity=".5"/>
-      <text x="80" y="104" text-anchor="middle" fill="#4a63d8" font-size="12" font-family="ui-monospace,monospace">Lemma</text>
-      <circle cx="320" cy="100" r="30" fill="#b9b4e6" fill-opacity=".15" stroke="#b9b4e6" stroke-width="1" stroke-opacity=".5"/>
-      <text x="320" y="104" text-anchor="middle" fill="#b9b4e6" font-size="12" font-family="ui-monospace,monospace">Noema</text>
-      <circle cx="200" cy="155" r="22" fill="#f0d98a" fill-opacity=".12" stroke="#f0d98a" stroke-width="1" stroke-opacity=".4"/>
-      <text x="200" y="159" text-anchor="middle" fill="#f0d98a" font-size="11" font-family="ui-monospace,monospace">Spine</text>
-      <line x1="110" y1="100" x2="290" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="130" x2="185" y2="150" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="320" y1="130" x2="215" y2="150" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4,4"/>
-    </svg>
   </div>
 </section>
+<script>
+(function(){
+  var panels = document.querySelectorAll('.manam-panel');
+  if (!panels.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (e.isIntersecting){
+        e.target.style.transitionDelay = (i * 0.1) + 's';
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  panels.forEach(function(p){ obs.observe(p); });
+})();
+</script>
 
 <!-- ============================================================
      AGENDA
@@ -948,259 +880,6 @@ addEventListener('scroll',function(){
 })();
 </script>
 
-<!-- ============================================================
-     MANAM 3D SCROLL SCENE
-     ============================================================ -->
-<script>
-/* ——— Manam 3D scroll scene (Three.js + GSAP ScrollTrigger) ——— */
-(function () {
-  if (typeof THREE === 'undefined') return;
-  var container = document.getElementById('manam-3d');
-  var section   = document.getElementById('manam');
-  var fallback  = document.getElementById('manam-fallback');
-  var spacer    = document.querySelector('.manam-scroll-spacer');
-  var reducedMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  if (reducedMotion || !container || !section) return;
-
-  // Check WebGL2
-  var testC = document.createElement('canvas');
-  if (!testC.getContext('webgl2')) {
-    if (fallback) fallback.style.display = 'block';
-    if (container) container.style.display = 'none';
-    if (spacer) spacer.style.display = 'none';
-    return;
-  }
-
-  var W = function () { return container.offsetWidth; };
-  var H = function () { return container.offsetHeight; };
-
-  // Renderer
-  var renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-  renderer.setClearColor(0x0a0c14, 0);
-  renderer.setSize(W(), H());
-  container.appendChild(renderer.domElement);
-
-  var scene  = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(60, W() / H(), 0.1, 100);
-  camera.position.z = 5;
-
-  // Palette
-  var BLUE     = new THREE.Color(0x4a63d8);
-  var LAVENDER = new THREE.Color(0xb9b4e6);
-  var YELLOW   = new THREE.Color(0xf0d98a);
-  var groupColors = [BLUE, LAVENDER, YELLOW];
-
-  var N = 15000;
-  var positions = new Float32Array(N * 3);
-  var colors    = new Float32Array(N * 3);
-  var groups    = new Uint8Array(N);
-
-  // Target cluster centers
-  var centers = [
-    new THREE.Vector3(-2.0,  0.0, 0),   // Lemma (left)
-    new THREE.Vector3( 2.0,  0.0, 0),   // Noema (right)
-    new THREE.Vector3( 0.0, -1.6, 0),   // Spine (center-low)
-  ];
-
-  var initPos   = new Float32Array(N * 3);
-  var targetPos = new Float32Array(N * 3);
-
-  for (var i = 0; i < N; i++) {
-    var g = i < N * 0.4 ? 0 : i < N * 0.8 ? 1 : 2;
-    groups[i] = g;
-
-    // Brain-like two-hemisphere shape
-    var theta = Math.acos(2 * Math.random() - 1);
-    var phi   = 2 * Math.PI * Math.random();
-    var r     = 1.2 * Math.cbrt(Math.random());
-    var x = r * Math.sin(theta) * Math.cos(phi);
-    var y = r * Math.sin(theta) * Math.sin(phi) * 0.75;
-    var z = r * Math.cos(theta) * 0.9;
-    x += Math.sign(x + 0.001) * 0.25;
-    if (Math.abs(x) < 0.12) y -= 0.15;
-
-    initPos[i*3]     = x;
-    initPos[i*3 + 1] = y;
-    initPos[i*3 + 2] = z;
-
-    // Cluster target
-    var c      = centers[g];
-    var spread = g === 2 ? 0.6 : 0.8;
-    targetPos[i*3]     = c.x + (Math.random() - 0.5) * spread;
-    targetPos[i*3 + 1] = c.y + (Math.random() - 0.5) * spread;
-    targetPos[i*3 + 2] = c.z + (Math.random() - 0.5) * spread * 0.3;
-
-    var col = groupColors[g];
-    colors[i*3]     = col.r;
-    colors[i*3 + 1] = col.g;
-    colors[i*3 + 2] = col.b;
-  }
-
-  positions.set(initPos);
-
-  var geo     = new THREE.BufferGeometry();
-  var posAttr = new THREE.BufferAttribute(positions, 3);
-  posAttr.setUsage(THREE.DynamicDrawUsage);
-  geo.setAttribute('position', posAttr);
-  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  var mat = new THREE.PointsMaterial({
-    size: 0.025, vertexColors: true, transparent: true, opacity: 0.7, sizeAttenuation: true,
-  });
-  var pts = new THREE.Points(geo, mat);
-  scene.add(pts);
-
-  // Connection lines
-  function makeLines(count, gA, gB) {
-    var indA = [], indB = [];
-    for (var k = 0; k < N; k++) {
-      if (groups[k] === gA) indA.push(k);
-      else if (groups[k] === gB) indB.push(k);
-    }
-    var linePositions = new Float32Array(count * 6);
-    var lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    var lineMat  = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
-    var lineObj  = new THREE.LineSegments(lineGeo, lineMat);
-    lineObj._pairs = [];
-    for (var j = 0; j < count; j++) {
-      lineObj._pairs.push([
-        indA[Math.floor(Math.random() * indA.length)],
-        indB[Math.floor(Math.random() * indB.length)],
-      ]);
-    }
-    scene.add(lineObj);
-    return lineObj;
-  }
-
-  var lines01 = makeLines(80, 0, 1);
-  var lines02 = makeLines(40, 0, 2);
-  var lines12 = makeLines(40, 1, 2);
-
-  function updateLines(lineObj, opacity) {
-    lineObj.material.opacity = opacity;
-    var arr = lineObj.geometry.getAttribute('position');
-    for (var ii = 0; ii < lineObj._pairs.length; ii++) {
-      var a = lineObj._pairs[ii][0], b = lineObj._pairs[ii][1];
-      arr.array[ii*6]     = positions[a*3];
-      arr.array[ii*6 + 1] = positions[a*3+1];
-      arr.array[ii*6 + 2] = positions[a*3+2];
-      arr.array[ii*6 + 3] = positions[b*3];
-      arr.array[ii*6 + 4] = positions[b*3+1];
-      arr.array[ii*6 + 5] = positions[b*3+2];
-    }
-    arr.needsUpdate = true;
-  }
-
-  // Labels
-  var mlTitle   = document.getElementById('ml-title');
-  var mlLemma   = document.getElementById('ml-lemma');
-  var mlNoema   = document.getElementById('ml-noema');
-  var mlSpine   = document.getElementById('ml-spine-label');
-  var settledEl = document.getElementById('manam-settled');
-
-  var progress    = 0;
-  var baseRot     = 0;
-  var isActive    = false;
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function eio(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-  function c01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
-
-  function updateScene(p) {
-    var ph1 = c01((p - 0.08) / 0.42);
-    var ph2 = c01((p - 0.50) / 0.25);
-    var ph3 = c01((p - 0.75) / 0.25);
-
-    for (var ii = 0; ii < N; ii++) {
-      var gg = groups[ii];
-      var sp = gg === 2 ? eio(ph2) : eio(ph1);
-      positions[ii*3]     = lerp(initPos[ii*3],   targetPos[ii*3],   sp);
-      positions[ii*3 + 1] = lerp(initPos[ii*3+1], targetPos[ii*3+1], sp);
-      positions[ii*3 + 2] = lerp(initPos[ii*3+2], targetPos[ii*3+2], sp);
-    }
-    posAttr.needsUpdate = true;
-
-    var rotBrake = 1 - eio(c01(p / 0.3));
-    pts.rotation.y = baseRot * rotBrake;
-    pts.rotation.x = Math.sin(baseRot * 0.3) * 0.1 * rotBrake;
-
-    pts.scale.setScalar(1 - ph3 * 0.4);
-    mat.opacity = 0.7 * (1 - ph3 * 0.8);
-
-    var lOp = eio(c01((p - 0.4) / 0.3)) * (1 - ph3);
-    updateLines(lines01, lOp * 0.25);
-    updateLines(lines02, lOp * 0.15);
-    updateLines(lines12, lOp * 0.15);
-
-    if (mlTitle)  mlTitle.classList.toggle('vis', p < 0.3);
-    if (mlLemma)  mlLemma.classList.toggle('vis', ph1 > 0.6 && ph3 < 0.5);
-    if (mlNoema)  mlNoema.classList.toggle('vis', ph1 > 0.6 && ph3 < 0.5);
-    if (mlSpine)  mlSpine.classList.toggle('vis', ph2 > 0.6 && ph3 < 0.5);
-
-    if (ph1 > 0.6) {
-      if (mlLemma) mlLemma.style.cssText = 'left:15%;top:40%;';
-      if (mlNoema) mlNoema.style.cssText = 'right:15%;top:40%;';
-    }
-    if (ph2 > 0.6 && mlSpine) {
-      mlSpine.style.cssText = 'left:50%;transform:translateX(-50%);top:65%;';
-    }
-
-    if (settledEl) settledEl.style.display = ph3 > 0.9 ? 'block' : 'none';
-  }
-
-  function render() {
-    requestAnimationFrame(render);
-    if (!isActive) return;
-    baseRot += 0.004;
-    updateScene(progress);
-    renderer.render(scene, camera);
-  }
-
-  if (mlTitle) mlTitle.classList.add('vis');
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  var isMobile = window.innerWidth <= 768;
-  if (!isMobile) {
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: '+=250%',
-      scrub: 1.5,
-      pin: true,
-      onUpdate: function (self) { progress = self.progress; },
-    });
-  } else {
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top 80%',
-      end: 'bottom 20%',
-      onUpdate: function (self) { progress = self.progress; },
-    });
-  }
-
-  var obs = new IntersectionObserver(function (entries) {
-    isActive = entries[0].isIntersecting;
-  }, { threshold: 0.01 });
-  obs.observe(section);
-
-  window.addEventListener('resize', function () {
-    renderer.setSize(W(), H());
-    camera.aspect = W() / H();
-    camera.updateProjectionMatrix();
-  });
-
-  render();
-  isActive = true;
-
-  window.addEventListener('beforeunload', function () {
-    renderer.dispose(); geo.dispose(); mat.dispose();
-  });
-})();
-</script>
 
 <!-- ============================================================
      PAPER SHADERS — ES module (lazy-mount, max 2 live contexts)
@@ -1208,7 +887,6 @@ addEventListener('scroll',function(){
 <script type="module">
 import {
   ShaderMount,
-  meshGradientFragmentShader,
   liquidMetalFragmentShader,
   grainGradientFragmentShader,
   lensDistortionFragmentShader,
@@ -1230,7 +908,7 @@ const maxPixels = isMobile
   : Math.min(window.innerWidth * window.innerHeight, 1920 * 1080);
 
 // ——— Lazy-mount system: destroy (not pause) contexts, max 2 live ———
-const MAX_LIVE = 2;
+const MAX_LIVE = 3;
 let liveContexts = 0;
 const shaderEntries = [];
 
@@ -1336,69 +1014,112 @@ const YELLOW   = [0.94, 0.85, 0.54, 1.0];
 const RED      = [0.85, 0.38, 0.31, 1.0];
 const NEAR_BLACK = [0.04, 0.05, 0.08, 1.0];
 
-// ——— 1. MeshGradient: Manam section full-bleed bg (behind Three.js canvas) ———
+// ——— 1. LiquidMetal: Lemma panel in Manam section ———
 registerShader({
-  container: document.getElementById('manam-mesh-bg'),
-  fragmentShader: meshGradientFragmentShader,
-  uniforms: {
-    'u_colors[0]': BLUE,
-    'u_colors[1]': LAVENDER,
-    'u_colors[2]': YELLOW,
-    'u_colors[3]': RED,
-    u_colorsCount: 4,
-    u_distortion: 0.6,
-    u_swirl: 0.15,
-    u_grainMixer: 0.05,
-    u_grainOverlay: 0.02,
-  },
-  speed: 0.15,
-  fallbackCss: 'background:linear-gradient(135deg,#0a0c14,#101428);',
-});
-
-// ——— 2. LiquidMetal: Lemma node in settled diagram ———
-registerShader({
-  container: document.getElementById('lemma-settled-shader'),
+  container: document.getElementById('manam-lemma-shader'),
   fragmentShader: liquidMetalFragmentShader,
   uniforms: {
-    u_colorBack: NEAR_BLACK,
+    u_colorBack: [0.04, 0.06, 0.18, 1.0],
     u_colorTint: BLUE,
-    u_softness: 0.6,
-    u_repetition: 1.5,
-    u_shiftRed: 0.02,
-    u_shiftBlue: -0.02,
-    u_distortion: 0.4,
-    u_contour: 0.3,
+    u_softness: 0.3,
+    u_repetition: 1.2,
+    u_shiftRed: 0.03,
+    u_shiftBlue: -0.03,
+    u_distortion: 0.6,
+    u_contour: 0.5,
     u_angle: 0.0,
     u_shape: LiquidMetalShapes.metaballs,
     u_isImage: false,
   },
   speed: 0.2,
-  fallbackCss: 'background:#4a63d820;',
+  fallbackCss: 'background:#4a63d830;',
 });
 
-// ——— 3. GrainGradient: Noema node in settled diagram ———
+// ——— 3. GrainGradient: Noema panel in Manam section ———
 const noiseImg = makeNoiseImage();
 noiseImg.addEventListener('load', () => {
   registerShader({
-    container: document.getElementById('noema-settled-shader'),
+    container: document.getElementById('manam-noema-shader'),
     fragmentShader: grainGradientFragmentShader,
     uniforms: {
-      u_colorBack: NEAR_BLACK,
+      u_colorBack: [0.07, 0.06, 0.16, 1.0],
       'u_colors[0]': LAVENDER,
       'u_colors[1]': YELLOW,
       u_colorsCount: 2,
       u_noiseTexture: noiseImg,
-      u_softness: 0.6,
-      u_intensity: 0.8,
-      u_noise: 0.4,
+      u_softness: 0.4,
+      u_intensity: 1.0,
+      u_noise: 0.25,
       u_shape: GrainGradientShapes.wave,
     },
     speed: 0.1,
-    fallbackCss: 'background:#b9b4e620;',
+    fallbackCss: 'background:#b9b4e630;',
   });
 });
 
-// ——— 4. LensDistortion: Spine section background ———
+// ——— 4. LensDistortion: Spine panel in Manam section ———
+// Make a brighter pillar image for the Spine panel
+function makePillarImageBright() {
+  const w = 512, h = 512;
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0d1e';
+  ctx.fillRect(0, 0, w, h);
+  const cols = 20;
+  for (let i = 0; i <= cols; i++) {
+    const x = (i / cols) * w;
+    const alpha = 0.18 + Math.random() * 0.22;
+    ctx.strokeStyle = `rgba(240,217,138,${alpha})`;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (let i = 0; i <= cols; i++) {
+    const x = (i / cols) * w + 10;
+    const alpha = 0.08 + Math.random() * 0.1;
+    ctx.strokeStyle = `rgba(185,180,230,${alpha})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  const img = new Image();
+  img.src = c.toDataURL();
+  return img;
+}
+const pillarImageManam = makePillarImageBright();
+pillarImageManam.addEventListener('load', () => {
+  registerShader({
+    container: document.getElementById('manam-spine-shader'),
+    fragmentShader: lensDistortionFragmentShader,
+    uniforms: {
+      u_image: pillarImageManam,
+      u_imageAspectRatio: 1.0,
+      u_spread: 0.5,
+      u_bias: 0.1,
+      u_angle: 0.0,
+      u_perspective: 0.2,
+      u_count: 3,
+      u_dispersion: 0.2,
+      u_dispersionShift: 0.06,
+      u_dispersionColor: 0.4,
+      u_focusCenter: 0.4,
+      u_focusEdges: 0.6,
+      u_swirl: 0.04,
+      u_noise: 0.05,
+      u_noiseFrequency: 2.0,
+      u_noiseOffset: 0.0,
+      u_lensBulge: 0.35,
+      u_lensCircle: 0.55,
+      u_grainMixer: 0.06,
+      u_grainOverlay: 0.03,
+      u_imageX: 0.5,
+      u_imageY: 0.5,
+    },
+    speed: 0.08,
+    fallbackCss: 'background:#0a0d1e;',
+  });
+});
+
+// ——— 5b. LensDistortion: Spine section background ———
 const pillarImage = makePillarImage();
 pillarImage.addEventListener('load', () => {
   registerShader({
@@ -1433,7 +1154,7 @@ pillarImage.addEventListener('load', () => {
   });
 });
 
-// ——— 5. Dithering: Applications items ———
+// ——— 6. Dithering: Applications items ———
 const ditherUniforms = {
   u_colorBack: [0.95, 0.95, 0.95, 1.0],
   u_colorFront: [0.29, 0.39, 0.85, 0.08],
@@ -1451,7 +1172,7 @@ const ditherUniforms = {
   });
 });
 
-// ——— 6. HalftoneDots: People section background ———
+// ——— 7. HalftoneDots: People section background ———
 const gradientImage = makeGradientImage();
 gradientImage.addEventListener('load', () => {
   registerShader({
@@ -1478,7 +1199,7 @@ gradientImage.addEventListener('load', () => {
   });
 });
 
-// ——— 7. Heatmap: divider band between Agenda and Evaluation ———
+// ——— 8. Heatmap: divider band between Agenda and Evaluation ———
 // TODO(naren): swap pillarImage2 for a real screenshot of the hero pillar field
 const pillarImage2 = makePillarImage();
 pillarImage2.addEventListener('load', () => {
