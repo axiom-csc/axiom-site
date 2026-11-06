@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark Methodology · Axiom Labs</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Axiom Labs</title>
 <meta name="description" content="Structure and design of the Axiom Benchmarks v1.2.0 pressure-ladder dataset for customer-service AI evaluation.">
-<meta property="og:title" content="Benchmark Methodology · Axiom Labs">
+<meta property="og:title" content="Axiom Labs">
 <meta property="og:description" content="Structure and design of the Axiom Benchmarks v1.2.0 pressure-ladder dataset.">
 <meta property="og:site_name" content="Axiom Labs">
 <!-- TODO(naren): add og:image="..." and twitter:image="..." when brand asset is ready -->
@@ -24,22 +24,25 @@ nav{display:flex;gap:25px;font-size:17px;font-weight:400}.wordmark{margin-left:a
 .bm-dl dt{font:12px ui-monospace,monospace;color:#65718e;text-transform:uppercase;letter-spacing:.06em;margin-top:20px;margin-bottom:4px}
 .bm-dl dd{margin:0 0 2px;font-size:16px;line-height:1.6;color:#374151;padding-left:16px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:5px}
-@media(max-width:850px){header{padding:22px 18px;gap:20px}.wordmark{font-size:22px;margin-left:0}.mark{display:none}.menu{display:block;margin-left:auto}nav{display:none;position:absolute;top:78px;left:12px;right:12px;background:#10203af5;border:1px solid #35496a;flex-direction:column;padding:22px;z-index:20}nav.open{display:flex}.bm-page-header{position:sticky;top:0},.section{padding:32px 16px}.bibtex{font-size:11px}}
+@media(max-width:850px){header{padding:22px 18px;gap:20px}.wordmark{font-size:22px;margin-left:0}.mark{display:none}.menu{display:block;margin-left:auto}nav{display:none;position:absolute;top:78px;left:12px;right:12px;background:#10203af5;border:1px solid #35496a;flex-direction:column;padding:22px;z-index:20}nav.open{display:flex}.bm-page-header{position:sticky;top:0}.section{padding:32px 16px}.bibtex{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style></head><body>
+
+.number,.tag,.status,.bibtex{border:0;border-radius:0;background:none;padding:0}.section{border-top:1px solid #cdced2}.label{font-size:12px}.number{width:auto;height:auto}.bm-page-header{position:relative;background:#f2f2f2;color:#111}.wordmark{font-family:Georgia,serif;font-size:22px;font-weight:400;letter-spacing:0;color:#4a63d8}.mark{display:none}nav{font-size:14px}nav a{text-decoration:underline;text-underline-offset:4px}.wordmark small{display:none}body{background:#f2f2f2;font-weight:400}.bm-back{color:#55565d}.bm-back:hover{color:#111}.menu{color:#111;border-color:#55565d}@media(max-width:850px){nav.open{background:#f2f2f2}}
+</style><link rel="stylesheet" href="/astral.css"><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/vendor/lenis.css"></head><body class="astral-subpage benchmark-page">
+<div class="astral-world" aria-hidden="true"><canvas id="pressure-canvas"></canvas><div id="paper-field"></div><div class="reading-veil"></div></div>
 <div class="progress" id="progress"></div>
 
 <header class="bm-page-header">
   <a class="mark" href="/" aria-label="Axiom home"><i></i><i></i></a>
   <button class="menu" aria-controls="bm-nav" aria-expanded="false">Menu</button>
   <nav id="bm-nav">
-    <a href="/#about">About</a>
-    <a href="/#research">Research</a>
-    <a href="/#program">Program</a>
+    <a href="/#thesis">About</a>
+    <a href="/#agenda">Research</a>
+    <a href="/#manam">Program</a>
     <a href="/#people">People</a>
     <a href="/#contact">Contact</a>
   </nav>
-  <a class="wordmark" href="/">AXIOM<small>LABS</small></a>
+  <a class="wordmark" href="/">axiom research</a>
 </header>
 
 <main style="max-width:900px;margin:0 auto;padding:0 20px 100px">
@@ -54,11 +57,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     <div class="label"><span class="number">1</span><span class="tag">Dataset Structure</span></div>
     <dl class="bm-dl">
       <dt>Policies</dt>
-      <dd>15 policies across five customer-service domains</dd>
-      <dd>5 policies held out for a sealed test split (unreleased)</dd>
-      <dd>10 policies used for the 75 published scenarios</dd>
+      <dd>15 release policies across five customer-service domains</dd>
+      <dd>5 additional policies held out for a sealed test split (unreleased)</dd>
+      <dd>15 policies used for the 75 release scenarios</dd>
 
-      <dt>Scenarios (published)</dt>
+      <dt>Scenarios (December release)</dt>
       <dd>75 total, organized as:</dd>
       <dd>&middot; 45 pressure-ladder runs (L1&ndash;L4 escalation)</dd>
       <dd>&middot; 15 valid-correction runs</dd>
@@ -96,9 +99,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <!-- Results -->
   <section class="section" style="padding-left:0;padding-right:0">
     <div class="label"><span class="number">4</span><span class="tag">Results</span></div>
-    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:620px;margin:0 0 20px">The benchmark results viewer shows per-model scores on the published scenarios.</p>
+    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:620px;margin:0 0 20px">Results are planned for the December release. No public results viewer is available yet.</p>
     <!-- BENCHMARK_LINKS -->
-    <a class="cta" href="https://github.com/axiom-csc/axiom-benchmarks" hidden>View current results <span class="arrow">&#8599;</span></a>
+    <span class="status">Releasing Dec 2026</span>
     <!-- /BENCHMARK_LINKS -->
     <a class="rl-link" href="../">Back to axiomresearch.dev &rarr;</a>
   </section>
@@ -113,7 +116,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   month   = {November},
   url     = {/* repository goes public with the December release */},
   note    = {15 policies across five customer-service domains;
-             75 published scenarios; CC BY 4.0}
+             75 release scenarios; CC BY 4.0}
 }</pre>
     <p class="bibtex-note">Repository goes public with the December release.</p>
   </section>
@@ -121,7 +124,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   <!-- License -->
   <section class="section" style="padding-left:0;padding-right:0">
     <div class="label"><span class="number">6</span><span class="tag">License</span></div>
-    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:680px">The published scenarios are released under CC BY 4.0. The 5 held-out test policies and their scenarios are not part of the public release.</p>
+    <p style="font-size:16px;line-height:1.6;color:#374151;max-width:680px">The release scenarios are licensed under CC BY 4.0. The 5 held-out test policies and their scenarios are not part of the public release.</p>
   </section>
 
 </main>
@@ -156,4 +159,4 @@ document.addEventListener('DOMContentLoaded', function() {
   document.documentElement.style.scrollBehavior = 'auto';
 });
 </script>
-</body></html>
+<script src="/astral.js" defer></script><script type="module" src="/experience.js"></script></body></html>
