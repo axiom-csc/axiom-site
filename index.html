@@ -471,6 +471,9 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
      MANAM — scroll-driven 3D architecture reveal
      ============================================================ -->
 <section id="manam" class="manam-scene band-accent">
+  <!-- MeshGradient full-bleed bg (behind Three.js canvas) -->
+  <div id="manam-mesh-bg" class="manam-bg" aria-hidden="true"></div>
+
   <span class="section-label">| MANAM</span>
 
   <!-- Three.js canvas container (sticky) -->
@@ -500,18 +503,22 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
   <div class="manam-scroll-spacer"></div>
 
   <!-- Settled diagram (shown by JS at end of animation) -->
-  <div class="manam-settled" id="manam-settled">
-    <svg viewBox="0 0 500 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Manam architecture key: Lemma, Noema, Spine" style="max-width:500px;width:100%">
-      <circle cx="80" cy="60" r="22" fill="#4a63d8" fill-opacity=".15" stroke="#4a63d8" stroke-width="1" stroke-opacity=".5"/>
-      <text x="80" y="64" text-anchor="middle" fill="#4a63d8" font-size="11" font-family="ui-monospace,monospace">Lemma</text>
-      <circle cx="420" cy="60" r="22" fill="#b9b4e6" fill-opacity=".15" stroke="#b9b4e6" stroke-width="1" stroke-opacity=".5"/>
-      <text x="420" y="64" text-anchor="middle" fill="#b9b4e6" font-size="11" font-family="ui-monospace,monospace">Noema</text>
-      <circle cx="250" cy="95" r="16" fill="#f0d98a" fill-opacity=".12" stroke="#f0d98a" stroke-width="1" stroke-opacity=".4"/>
-      <text x="250" y="99" text-anchor="middle" fill="#f0d98a" font-size="10" font-family="ui-monospace,monospace">Spine</text>
+  <div class="manam-settled" id="manam-settled" style="position:relative">
+    <svg viewBox="0 0 500 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Manam architecture key: Lemma, Noema, Spine" style="max-width:500px;width:100%;display:block">
+      <circle cx="80" cy="60" r="22" fill="#4a63d8" fill-opacity=".08" stroke="#4a63d8" stroke-width="1" stroke-opacity=".4"/>
+      <text x="80" y="88" text-anchor="middle" fill="#4a63d8" font-size="10" font-family="ui-monospace,monospace">Lemma</text>
+      <circle cx="420" cy="60" r="22" fill="#b9b4e6" fill-opacity=".08" stroke="#b9b4e6" stroke-width="1" stroke-opacity=".4"/>
+      <text x="420" y="88" text-anchor="middle" fill="#b9b4e6" font-size="10" font-family="ui-monospace,monospace">Noema</text>
+      <circle cx="250" cy="95" r="16" fill="#f0d98a" fill-opacity=".08" stroke="#f0d98a" stroke-width="1" stroke-opacity=".35"/>
+      <text x="250" y="119" text-anchor="middle" fill="#f0d98a" font-size="9" font-family="ui-monospace,monospace">Spine</text>
       <line x1="102" y1="60" x2="398" y2="60" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,4"/>
       <line x1="80" y1="82" x2="238" y2="92" stroke="rgba(255,255,255,.07)" stroke-width="1" stroke-dasharray="4,4"/>
       <line x1="420" y1="82" x2="262" y2="92" stroke="rgba(255,255,255,.07)" stroke-width="1" stroke-dasharray="4,4"/>
     </svg>
+    <!-- LiquidMetal on Lemma node -->
+    <div id="lemma-settled-shader" style="position:absolute;width:44px;height:44px;border-radius:50%;overflow:hidden;left:calc(80/500*100%);top:calc(60/120*100%);transform:translate(-50%,-50%);pointer-events:none"></div>
+    <!-- GrainGradient on Noema node -->
+    <div id="noema-settled-shader" style="position:absolute;width:44px;height:44px;border-radius:50%;overflow:hidden;left:calc(420/500*100%);top:calc(60/120*100%);transform:translate(-50%,-50%);pointer-events:none"></div>
   </div>
 
   <!-- Static fallback: no WebGL / reduced-motion -->
@@ -555,6 +562,9 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
     </li>
   </ul>
 </section>
+
+<!-- Heatmap divider band -->
+<div id="heatmap-divider" aria-hidden="true" style="height:56px;position:relative;overflow:hidden;background:#0a0c14"></div>
 
 <!-- ============================================================
      EVALUATION
@@ -1207,6 +1217,7 @@ import {
   liquidMetalFragmentShader,
   grainGradientFragmentShader,
   lensDistortionFragmentShader,
+  heatmapFragmentShader,
   ditheringFragmentShader,
   halftoneDotsFragmentShader,
   LiquidMetalShapes,
@@ -1330,7 +1341,67 @@ const YELLOW   = [0.94, 0.85, 0.54, 1.0];
 const RED      = [0.85, 0.38, 0.31, 1.0];
 const NEAR_BLACK = [0.04, 0.05, 0.08, 1.0];
 
-// architecture-scene: Manam section uses Three.js — no MeshGradient/LiquidMetal/GrainGradient here
+// ——— 1. MeshGradient: Manam section full-bleed bg (behind Three.js canvas) ———
+registerShader({
+  container: document.getElementById('manam-mesh-bg'),
+  fragmentShader: meshGradientFragmentShader,
+  uniforms: {
+    'u_colors[0]': BLUE,
+    'u_colors[1]': LAVENDER,
+    'u_colors[2]': YELLOW,
+    'u_colors[3]': RED,
+    u_colorsCount: 4,
+    u_distortion: 0.6,
+    u_swirl: 0.15,
+    u_grainMixer: 0.05,
+    u_grainOverlay: 0.02,
+  },
+  speed: 0.15,
+  fallbackCss: 'background:linear-gradient(135deg,#0a0c14,#101428);',
+});
+
+// ——— 2. LiquidMetal: Lemma node in settled diagram ———
+registerShader({
+  container: document.getElementById('lemma-settled-shader'),
+  fragmentShader: liquidMetalFragmentShader,
+  uniforms: {
+    u_colorBack: NEAR_BLACK,
+    u_colorTint: BLUE,
+    u_softness: 0.6,
+    u_repetition: 1.5,
+    u_shiftRed: 0.02,
+    u_shiftBlue: -0.02,
+    u_distortion: 0.4,
+    u_contour: 0.3,
+    u_angle: 0.0,
+    u_shape: LiquidMetalShapes.metaballs,
+    u_isImage: false,
+  },
+  speed: 0.2,
+  fallbackCss: 'background:#4a63d820;',
+});
+
+// ——— 3. GrainGradient: Noema node in settled diagram ———
+const noiseImg = makeNoiseImage();
+noiseImg.addEventListener('load', () => {
+  registerShader({
+    container: document.getElementById('noema-settled-shader'),
+    fragmentShader: grainGradientFragmentShader,
+    uniforms: {
+      u_colorBack: NEAR_BLACK,
+      'u_colors[0]': LAVENDER,
+      'u_colors[1]': YELLOW,
+      u_colorsCount: 2,
+      u_noiseTexture: noiseImg,
+      u_softness: 0.6,
+      u_intensity: 0.8,
+      u_noise: 0.4,
+      u_shape: GrainGradientShapes.wave,
+    },
+    speed: 0.1,
+    fallbackCss: 'background:#b9b4e620;',
+  });
+});
 
 // ——— 4. LensDistortion: Spine section background ———
 const pillarImage = makePillarImage();
@@ -1409,6 +1480,22 @@ gradientImage.addEventListener('load', () => {
     },
     speed: 0,
     fallbackCss: '',
+  });
+});
+
+// ——— 7. Heatmap: divider band between Agenda and Evaluation ———
+// TODO(naren): swap pillarImage2 for a real screenshot of the hero pillar field
+const pillarImage2 = makePillarImage();
+pillarImage2.addEventListener('load', () => {
+  registerShader({
+    container: document.getElementById('heatmap-divider'),
+    fragmentShader: heatmapFragmentShader,
+    uniforms: {
+      u_image: pillarImage2,
+      u_imageAspectRatio: 1.0,
+    },
+    speed: 0.1,
+    fallbackCss: 'background:linear-gradient(90deg,#0a0c14,#101428,#0a0c14);',
   });
 });
 </script>
