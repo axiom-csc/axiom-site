@@ -1,7 +1,9 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Axiom Labs</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Axiom Research</title>
 <meta name="description" content="Axiom Labs is building Manam, a non-LLM architecture designed to reason about people, run on modest hardware, and stay honest under pressure.">
 <link rel="canonical" href="https://axiomresearch.dev/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23030507'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%234a63d8' font-family='monospace'>A</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23030507'/><text x='16' y='23' font-size='21' text-anchor='middle' fill='%234a63d8' font-family='Georgia,serif'>a</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap" rel="stylesheet">
 <meta property="og:title" content="Axiom Labs">
 <meta property="og:description" content="Building Manam, a non-LLM architecture that stays honest under pressure.">
 <meta property="og:site_name" content="Axiom Labs">
@@ -29,14 +31,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--p-blue);outline-off
 
 /* ——— Nav ——— */
 header{position:absolute;top:0;left:0;right:0;z-index:30;padding:24px 32px;display:flex;align-items:center;gap:40px;color:white}
-.mark{display:flex;gap:5px;width:34px;flex-shrink:0}
-.mark i{height:29px;width:12px;border:3px solid white;transform:skew(-17deg)}
 nav{display:flex;gap:24px;font-size:15px;font-weight:400}
 nav a{opacity:.7;transition:opacity .2s}
 nav a:hover{opacity:1}
 nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:1px}
-.wordmark{margin-left:auto;font-size:24px;font-weight:700;letter-spacing:-1px;white-space:nowrap}
-.wordmark small{font-size:11px;letter-spacing:1.5px;margin-left:6px;font-weight:400;opacity:.7}
+.logo-serif{margin-left:auto;font-family:'EB Garamond',Georgia,serif;font-size:22px;font-weight:400;color:#4a63d8;letter-spacing:0.01em;white-space:nowrap;text-decoration:none}
 .menu-btn{display:none;background:none;color:white;border:1px solid rgba(255,255,255,.4);padding:7px 11px;font:13px inherit;cursor:pointer}
 
 /* ——— Hero ——— */
@@ -345,8 +344,7 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
 }
 @media(max-width:700px){
   header{padding:18px 20px;gap:16px}
-  .wordmark{font-size:20px}
-  .mark{display:none}
+  .logo-serif{font-size:18px}
   .menu-btn{display:block;margin-left:auto}
   nav{display:none;position:absolute;top:62px;left:12px;right:12px;background:#10203af5;border:1px solid #35496a;flex-direction:column;padding:20px;z-index:50;gap:16px}
   nav.open{display:flex}
@@ -427,7 +425,6 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
   <div class="hero-gradient-fallback" id="hero-fallback"></div>
 
   <header id="main-header">
-    <a class="mark" href="#" aria-label="Axiom home"><i></i><i></i></a>
     <button class="menu-btn" aria-controls="main-nav" aria-expanded="false">Menu</button>
     <nav id="main-nav">
       <a href="#thesis">Thesis</a>
@@ -437,7 +434,7 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
       <a href="#people">People</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="wordmark" href="#">AXIOM<small>LABS</small></a>
+    <a class="logo-serif" href="#" aria-label="Axiom Research home">axiom research</a>
   </header>
 
   <div class="hero-banner" role="banner">
@@ -792,7 +789,7 @@ footer{padding:28px 32px;background:#111827;color:#9ba9c5;display:flex;justify-c
 </main>
 
 <footer>
-  <span>AXIOM LABS &middot; Research-led model development</span>
+  <span style="font-family:'EB Garamond',Georgia,serif;color:#4a63d8;font-size:16px">axiom research</span>
   <span>axiomresearch.dev &middot; <a href="/privacy/" style="color:inherit;border-bottom:1px solid #374865">Privacy</a></span>
   <span>Shaders by <a href="https://paper.design" target="_blank" rel="noopener" style="color:inherit;border-bottom:1px solid #374865">Paper</a></span>
 </footer>
