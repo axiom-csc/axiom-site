@@ -3,7 +3,7 @@
 <link rel="canonical" href="https://axiomresearch.dev/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23030507'/><text x='16' y='23' font-size='21' text-anchor='middle' fill='%234a63d8' font-family='Georgia,serif'>a</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <meta property="og:title" content="Axiom Labs">
 <meta property="og:description" content="Building Manam, a non-LLM architecture that stays honest under pressure.">
 <meta property="og:site_name" content="Axiom Labs">
@@ -90,7 +90,10 @@ nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bott
 }
 </style>
 <link rel="stylesheet" href="/astral.css">
-<link rel="stylesheet" href="/vendor/lenis.css"></head>
+<link rel="stylesheet" href="/vendor/lenis.css">
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script></head>
 <body>
 
 <div class="progress" id="progress"></div>
@@ -149,6 +152,7 @@ nav a.active{opacity:1;border-bottom:1px solid rgba(255,255,255,.6);padding-bott
      MANAM
      ============================================================ -->
 <section id="manam">
+  <canvas id="manam-scene" aria-hidden="true"></canvas>
   <div class="manam-heading"><span class="section-label">MANAM</span>
   <h2 class="manam-title">Manam</h2></div>
   <div class="manam-halves">
@@ -470,5 +474,10 @@ addEventListener('scroll',function(){
 </script>
 
 
+<script>
+/* ——— Publications layout toggle: ?pub=2col switches to the narrow-left variant ——— */
+(function(){var p=new URLSearchParams(location.search).get('pub');if(p==='2col'||p==='2')document.body.setAttribute('data-pub','2col');})();
+</script>
 <script src="/astral.js" defer></script>
-<script type="module" src="/experience.js"></script></body></html>
+<script type="module" src="/experience.js"></script>
+<script type="module" src="/manam-scene.js"></script></body></html>
