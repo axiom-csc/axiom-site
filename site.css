@@ -88,3 +88,11 @@ a:hover .link-arrow{color:#e2c7fa}
 @media(max-width:1000px){.site-header nav{gap:21px}.site-footer,.home .site-footer{grid-template-columns:1fr 1.8fr;gap:30px}.site-footer>.footer-navigation{gap:18px;font-size:10px}}
 @media(max-width:700px){.site-header nav{gap:22px;align-items:flex-start}.research-menu-content{position:static;margin-top:12px;min-width:0;padding:6px 0 3px 14px;background:transparent;backdrop-filter:none;border:0;border-radius:0;box-shadow:none}.research-menu summary{font-size:13px}.site-header nav .research-menu-content a{font-size:12px;padding:7px 0}.site-header nav .research-menu-content .menu-overview{border:0;margin:0;padding:7px 0}.article-byline{padding:22px 24px 0;display:block;font-size:10px}.article-byline>span{display:block;margin:4px 0}.related-research{margin:0 24px;padding:0 0 40px}.related-research h2{font-size:19px}.related-research>div{display:block}.related-research a{display:block;margin-bottom:15px;font-size:12px}.site-footer,.home .site-footer{display:block;padding:30px 24px 24px}.site-footer>.footer-navigation{margin:27px 0;grid-template-columns:1fr 1fr;gap:25px;font-size:10px}.footer-navigation>div{gap:10px}.footer-identity>p{font-size:10px}.site-footer>.footer-fine{font-size:9px}}
 .site-footer>.footer-identity{display:block}
+/* Let page frames follow the viewport instead of stopping at a fixed desktop width. */
+body{min-height:100svh;display:flex;flex-direction:column}
+.site-header,main,.home main,.site-footer,.home .site-footer{width:100%;max-width:none;margin-left:0;margin-right:0}
+.site-header{margin-top:0;margin-bottom:0;flex-shrink:0}
+main{flex:1 0 auto;margin-top:0;margin-bottom:0}
+.site-footer,.home .site-footer{flex-shrink:0;margin-top:auto;margin-bottom:0}
+.privacy-main{max-width:none}
+.privacy-main>.prose{max-width:820px;margin:0 auto}
