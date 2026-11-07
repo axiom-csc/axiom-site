@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark methodology — Axiom Research</title><meta name="description" content="The Axiom pressure-ladder benchmark: dataset structure, controls, release status, and a complete example."><link rel="canonical" href="https://axiomresearch.dev/benchmark/"><meta property="og:title" content="Benchmark methodology — Axiom Research"><meta property="og:description" content="The Axiom pressure-ladder benchmark: dataset structure, controls, release status, and a complete example."><meta property="og:site_name" content="Axiom Research"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;450;500;550;600;650;700&display=swap"><link rel="stylesheet" href="/vendor/lenis.css"><link rel="stylesheet" href="/site.css"></head><body class="inner-page"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="wordmark" href="/" aria-label="Axiom Research home">axiom research</a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu</button><nav id="navigation" aria-label="Main navigation"><details class="research-menu"><summary>Research <span aria-hidden="true">⌄</span></summary><div class="research-menu-content"><a href="/research/" class="menu-overview">Explore all research <span aria-hidden="true">↗</span></a><a href="/benchmark/">Social reasoning</a><a href="/research/code/">Code reasoning</a><a href="/research/physical/">Physical reasoning</a><a href="/research/interpretability/">Interpretability</a></div></details><a href="/manam/">Manam</a><a href="/publications/">Publications &amp; releases</a><a href="/about/">About</a></nav></header><main id="main"><div class="page-heading"><a class="back-link" href="/research/">← Research</a><p class="eyebrow">Evaluation / Releasing December 2026</p><h1>When should an answer change?</h1><p class="page-deck">A pressure-ladder evaluation of policy adherence, valid corrections, and changes to the policy itself.</p></div><article class="prose methodology">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchmark methodology — Axiom Research</title><meta name="description" content="The Axiom pressure-ladder benchmark: dataset structure, controls, release status, and a complete example."><link rel="canonical" href="https://axiomresearch.dev/benchmark/"><meta property="og:title" content="Benchmark methodology — Axiom Research"><meta property="og:description" content="The Axiom pressure-ladder benchmark: dataset structure, controls, release status, and a complete example."><meta property="og:site_name" content="Axiom Research"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;450;500;550;600;650;700&display=swap"><link rel="stylesheet" href="/vendor/lenis.css"><link rel="stylesheet" href="/site.css"><link rel="stylesheet" href="/subpages.css"></head><body class="inner-page paper-page technical-page"><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="wordmark" href="/" aria-label="Axiom Research home">axiom research</a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu</button><nav id="navigation" aria-label="Main navigation"><details class="research-menu"><summary>Research <span aria-hidden="true">⌄</span></summary><div class="research-menu-content"><a href="/research/" class="menu-overview">Explore all research <span aria-hidden="true">↗</span></a><a href="/benchmark/">Social reasoning</a><a href="/research/code/">Code reasoning</a><a href="/research/physical/">Physical reasoning</a><a href="/research/interpretability/">Interpretability</a></div></details><a href="/manam/">Manam</a><a href="/publications/">Publications &amp; releases</a><a href="/about/">About</a></nav></header><main id="main"><header class="technical-heading"><p class="editorial-category">Evaluation · Methodology</p><h1>When should an<br>answer change?</h1><p class="editorial-deck">A pressure-ladder evaluation of policy adherence, valid corrections, and changes to the policy itself.</p><p class="technical-version">Axiom Benchmarks v1.2.0 · Planned release: December 2026</p></header><div class="dataset-facts"><div><strong>15</strong><span>release policies</span></div><div><strong>75</strong><span>release scenarios</span></div><div><strong>3</strong><span>run types</span></div><div><strong>CC BY 4.0</strong><span>planned dataset license</span></div></div><div class="editorial-layout method-document"><aside class="editorial-sidebar"><p class="document-label">Methodology</p><nav class="document-contents" aria-label="Methodology contents"><a href="#method-0">Dataset Structure</a><a href="#method-1">Pressure Ladder</a><a href="#method-2">Scoring &amp; Judging</a><a href="#method-3">Results</a><a href="#method-4">Citation</a><a href="#method-5">License</a><a href="#method-6">Inspect a complete scenario</a><a href="#method-7">Related work</a></nav><p class="document-status">Results and judge validation are planned for the December release.</p></aside><article class="prose editorial-prose methodology">
 
 
 
@@ -6,8 +6,8 @@
   <p>Axiom Benchmarks v1.2.0 &middot; November 2026</p>
 
   <!-- Dataset structure -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">1</span><span class="tag">Dataset Structure</span></h2>
+  <section id="method-0">
+    <h2>Dataset Structure</h2>
     <dl class="bm-dl">
       <dt>Policies</dt>
       <dd>15 release policies across five customer-service domains</dd>
@@ -32,8 +32,8 @@
   </section>
 
   <!-- Pressure ladder -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">2</span><span class="tag">Pressure Ladder</span></h2>
+  <section id="method-1">
+    <h2>Pressure Ladder</h2>
     <ul>
       <li>Four escalating pressure levels: L1&ndash;L4</li>
       <li>Each level applies increasing social and rhetorical pressure to the assistant</li>
@@ -43,15 +43,15 @@
   </section>
 
   <!-- Scoring and judging -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">3</span><span class="tag">Scoring &amp; Judging</span></h2>
+  <section id="method-2">
+    <h2>Scoring &amp; Judging</h2>
     <!-- TODO(naren): describe judging procedure (Lemma rule engine / human review) -->
     <p>Coming with the December release.</p>
   </section>
 
   <!-- Results -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">4</span><span class="tag">Results</span></h2>
+  <section id="method-3">
+    <h2>Results</h2>
     <p>Results are planned for the December release. No public results viewer is available yet.</p>
     <!-- BENCHMARK_LINKS -->
     <span class="status">Releasing Dec 2026</span>
@@ -60,8 +60,8 @@
   </section>
 
   <!-- Citation -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">5</span><span class="tag">Citation</span></h2>
+  <section id="method-4">
+    <h2>Citation</h2>
     <pre class="bibtex" data-lenis-prevent>@dataset{axiom_benchmarks_v1_2_0,
   title   = {Axiom Benchmarks v1.2.0},
   author  = {Saravanan, Naren},
@@ -75,12 +75,12 @@
   </section>
 
   <!-- License -->
-  <section class="section">
-    <h2 class="method-heading"><span class="number">6</span><span class="tag">License</span></h2>
+  <section id="method-5">
+    <h2>License</h2>
     <p>The release scenarios are licensed under CC BY 4.0. The 5 held-out test policies and their scenarios are not part of the public release.</p>
   </section>
 
-<section id="scenario"><h2>Inspect a complete scenario</h2><p>The seven user turns below come from scenario ref-01-R1. The shop is fictional. The stated policy remains fixed throughout this pressure run.</p><details id="pressure-visual"><summary>Inspect the seven-turn refund scenario <span>+</span></summary><div class="exhibit-content">
+<section id="method-6"><h2>Inspect a complete scenario</h2><p>The seven user turns below come from scenario ref-01-R1. The shop is fictional. The stated policy remains fixed throughout this pressure run.</p><details id="pressure-visual"><summary>Inspect the seven-turn refund scenario <span>+</span></summary><div class="exhibit-content">
     <span class="pmap-label">Scenario ref-01-R1</span>
     <div class="pmap-wrap">
       <div class="pmap-panel" id="pmap-panel">
@@ -153,4 +153,4 @@
         <p class="pmap-footer">Scenario ref-01-R1 &middot; Axiom pressure-ladder benchmark &middot; CC BY 4.0. Assistant replies are judged by the benchmark; none shown.</p>
       </div>
     </div>
-  </div></details></section><section><h2>Related work</h2><p><a href="/lemma/">Lemma</a> evaluates conversation-level policy departures. <a href="/noema/">Noema</a> investigates forecasts of future behavior. <a href="/research/interpretability/">Spine</a> investigates internal activation signals.</p></section></article></main><footer class="site-footer"><div class="footer-identity"><a class="wordmark" href="/">axiom research</a><p>Independent research in intelligence.</p></div><div class="footer-navigation"><div><a href="/research/">Research</a><a href="/manam/">Manam</a><a href="/publications/">Publications &amp; releases</a></div><div><a href="/lemma/">Lemma</a><a href="/noema/">Noema</a><a href="/benchmark/">Benchmark methodology</a></div><div><a href="/about/">About the lab</a><a href="mailto:research@axiomresearch.dev">Research enquiries ↗</a><a href="https://github.com/axiom-csc" target="_blank" rel="noopener">GitHub ↗</a></div></div><p class="footer-fine">© 2026 Axiom Research <span><a href="/privacy/">Privacy</a></span></p></footer><script type="module" src="/site.js"></script></body></html>
+  </div></details></section><section id="method-7"><h2>Related work</h2><p><a href="/lemma/">Lemma</a> evaluates conversation-level policy departures. <a href="/noema/">Noema</a> investigates forecasts of future behavior. <a href="/research/interpretability/">Spine</a> investigates internal activation signals.</p></section></article></div></main><footer class="site-footer"><div class="footer-identity"><a class="wordmark" href="/">axiom research</a><p>Independent research in intelligence.</p></div><div class="footer-navigation"><div><a href="/research/">Research</a><a href="/manam/">Manam</a><a href="/publications/">Publications &amp; releases</a></div><div><a href="/lemma/">Lemma</a><a href="/noema/">Noema</a><a href="/benchmark/">Benchmark methodology</a></div><div><a href="/about/">About the lab</a><a href="mailto:research@axiomresearch.dev">Research enquiries ↗</a><a href="https://github.com/axiom-csc" target="_blank" rel="noopener">GitHub ↗</a></div></div><p class="footer-fine">© 2026 Axiom Research <span><a href="/privacy/">Privacy</a></span></p></footer><script type="module" src="/site.js"></script></body></html>

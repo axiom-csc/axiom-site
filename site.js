@@ -24,3 +24,10 @@ search?.addEventListener('input',filterResearch);
 const researchMenu=document.querySelector('.research-menu');
 addEventListener('click',event=>{if(researchMenu?.open&&!researchMenu.contains(event.target))researchMenu.open=false;});
 addEventListener('keydown',event=>{if(event.key==='Escape'&&researchMenu?.open){researchMenu.open=false;researchMenu.querySelector('summary').focus();}});
+const releaseButtons=[...document.querySelectorAll('[data-release-filter]')];
+const releases=[...document.querySelectorAll('[data-release]')];
+const publicationSearch=document.querySelector('.publication-search');
+let releaseFilter='all';
+function filterPublications(){const query=(publicationSearch?.value||'').trim().toLowerCase();let shown=0;releases.forEach(item=>{item.hidden=!((releaseFilter==='all'||item.dataset.release===releaseFilter)&&item.textContent.toLowerCase().includes(query));if(!item.hidden)shown++;});const empty=document.querySelector('.archive-empty');if(empty)empty.hidden=shown>0;smooth?.resize();}
+releaseButtons.forEach(button=>button.addEventListener('click',()=>{releaseFilter=button.dataset.releaseFilter;releaseButtons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));filterPublications();}));
+publicationSearch?.addEventListener('input',filterPublications);
