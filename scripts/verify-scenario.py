@@ -29,7 +29,7 @@ source = Path(sys.argv[1])
 scenario = next(s for s in json.loads(source.read_text())['scenarios'] if s['id'] == 'ref-01-R1')
 expected = [turn['text'] for turn in scenario['turns']]
 parser = Exhibit()
-parser.feed((Path(__file__).resolve().parents[1] / 'index.html').read_text())
+parser.feed((Path(__file__).resolve().parents[1] / 'benchmark' / 'index.html').read_text())
 actual = json.loads(Path(sys.argv[2]).read_text()) if len(sys.argv) > 2 else parser.turns
 assert actual == parser.turns, 'Browser text differs from parsed HTML'
 diff = ''.join(difflib.unified_diff([s+'\n' for s in expected], [s+'\n' for s in actual], fromfile=str(source)+'#ref-01-R1', tofile='rendered .pmap-text'))
