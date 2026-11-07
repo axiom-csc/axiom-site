@@ -8,7 +8,7 @@
     var progress=hero?Math.min(1,Math.max(0,scrollY/Math.max(1,hero.offsetHeight*.45))):1;
     progress=progress*progress*(3-2*progress);
     var base=mobile?.72:0;
-    var reading=mobile?(subtle?.80:.72):(subtle?.68:.54);
+    var reading=mobile?(subtle?.80:.72):(subtle?.78:.69);
     root.style.setProperty('--reading-veil',String(base+(reading-base)*progress));
   }
   update();addEventListener('scroll',update,{passive:true});addEventListener('resize',update);
