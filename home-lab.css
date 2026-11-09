@@ -51,3 +51,9 @@
 /* Keep navigation readable as the live field changes, without a header surface. */
 .home .astral-hero .hero-atmosphere::after{background:linear-gradient(to bottom,rgba(9,7,18,.53),rgba(9,7,18,.24) 28%,rgba(9,7,18,.24))}
 .home .site-header{left:0;right:0;width:100%;max-width:none;transform:none}
+.phase-banner{position:absolute;top:95px;left:var(--gutter);right:var(--gutter);z-index:2;display:flex;align-items:center;justify-content:space-between;gap:35px;color:#d1c1e1}
+.phase-banner p{font-size:12px;line-height:1.8;color:#c4b0d8;max-width:104ch;margin:0}
+.phase-banner>a{font-size:11px;white-space:nowrap;color:#bca1d0}
+.home .hero.astral-hero{padding-top:175px}
+.area-state{display:block;font-size:11px;line-height:1.7;color:#b49bc8;margin:0 0 9px}
+@media(max-width:700px){.phase-banner{top:85px;left:24px;right:24px;display:block}.phase-banner p{font-size:11px;line-height:1.75}.phase-banner>a{display:inline-block;font-size:10px;margin-top:8px}.home .hero.astral-hero{padding-top:245px;padding-bottom:85px}.area-state{font-size:10px;margin-bottom:8px}}
