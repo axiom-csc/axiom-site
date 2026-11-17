@@ -5,7 +5,7 @@ function syncMotion(){smooth?.destroy();smooth=null;window.lenis=null;if(!prefer
 syncMotion();preference.addEventListener('change',syncMotion);
 const toggle=document.querySelector('.menu-toggle');const navigation=document.querySelector('#navigation');
 toggle?.addEventListener('click',()=>{const open=navigation.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
-navigation?.querySelectorAll('a').forEach(link=>{if(location.pathname.startsWith(link.pathname))link.setAttribute('aria-current','page');link.addEventListener('click',()=>{navigation.classList.remove('open');toggle.setAttribute('aria-expanded','false');});});
+navigation?.querySelectorAll('a').forEach(link=>{if(!link.hash&&link.pathname!=='/'&&location.pathname.startsWith(link.pathname))link.setAttribute('aria-current','page');link.addEventListener('click',()=>{navigation.classList.remove('open');toggle.setAttribute('aria-expanded','false');});});
 addEventListener('keydown',event=>{if(event.key==='Escape'&&navigation?.classList.contains('open')&&!document.querySelector('.research-menu[open]')){navigation.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.focus();}});
 
 const filterButtons=[...document.querySelectorAll('[data-filter]')];

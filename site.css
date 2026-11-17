@@ -96,3 +96,6 @@ main{flex:1 0 auto;margin-top:0;margin-bottom:0}
 .site-footer,.home .site-footer{flex-shrink:0;margin-top:auto;margin-bottom:0}
 .privacy-main{max-width:none}
 .privacy-main>.prose{max-width:820px;margin:0 auto}
+
+/* Tenthlook wordmark (outlined SVG; see /brand) */
+.wordmark img{display:block;height:24px;width:auto}.site-footer .wordmark img{height:20px}@media(max-width:700px){.wordmark img{height:22px}}
