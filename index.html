@@ -9,11 +9,12 @@
      set "starlette (held out)": true_callers 60, found 53, false_positives 0, recall 0.8833 -->
 <p class="product-fact">Found 53 of 60 direct callers (88%) with 0 false positives on starlette, a held-out library.</p><p class="product-note">Not on PyPI yet.</p></article>
 <article class="product-card"><p class="product-status">Beta</p><h3>Panel</h3><p>A guard for support chatbots: it checks every reply against your store&rsquo;s written policy and stops it claiming actions that never happened.</p>
-<!-- SOURCE: ~/axiom-lab-worktrees/panel-guard (product/panel-shopify) @ b4bf81c,
-     products/panel/guard_results/fresh5_compare/summary_gpt-5.6-luna.json (file added in fa1bdb1):
-     panel.unbacked_claims 0/60, plain.unbacked_claims 13/60, panel.violation_rate 0/60; set fresh5, Panel v6.2, gpt-5.6-luna.
-     Same figures in products/panel/GUARD_README.md headline table. UPDATE when fresh6 lands. -->
-<p class="product-fact">On a held-out set: 0 unbacked &ldquo;it&rsquo;s done&rdquo; claims in 60 replies, against 13 in 60 for the same model with a plain prompt.</p><p class="product-note">Shopify integration tested with mocks only; not yet run on a real store.</p></article>
+<!-- SOURCE: ~/axiom-lab-worktrees/panel-guard (product/panel-shopify) @ d64669a,
+     products/panel/guard_results/fresh6_compare/summary_gpt-5.6-luna.json (added in d64669a):
+     panel.unbacked_claims 0/60, plain.unbacked_claims 5/60, panel.turns_with_an_action_without_consent 0/60
+     (14 executed actions), panel.allowed_requests_carried_out 8/8, plain 0/8; set fresh6 (hashed in f035246 before
+     the run), Panel v6.3, gpt-5.6-luna. Same figures in products/panel/GUARD_README.md headline table. -->
+<p class="product-fact">On a held-out set: 0 unbacked &ldquo;it&rsquo;s done&rdquo; claims in 60 replies (5 in 60 with a plain prompt), and no action run without the customer asking.</p><p class="product-note">Shopify integration tested with mocks only; not yet run on a real store.</p></article>
 <article class="product-card"><p class="product-status">Beta</p><h3>Rudis</h3><p>A Chrome extension for ChatGPT and Claude that flags when the AI changes its answer without a reason, and helps you push back.</p>
 <!-- SOURCE: ~/axiom-lab-worktrees/rudis (product/rudis) @ 89166ee, products/rudis/results/eval_shifts_on_panel_validation.json
      (last changed in 181c566): answer_lines_removed tp 32, fn 111 (143 caved replies), recall 0.2238, precision 0.6809.
