@@ -66,3 +66,6 @@
 @media(max-width:1100px){.product-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.products{padding:28px 24px 35px}.products-heading{display:block;margin-bottom:22px}.products-heading h2{font-size:22px}.products-heading p{font-size:11px;margin-top:8px}.product-grid{grid-template-columns:1fr;gap:14px}.product-card{padding:20px}.product-card h3{font-size:21px}}
 .home .astral-hero h1 .accent-dot{color:#9b8cff}
+.product-card{display:flex;flex-direction:column}.product-card .product-status{align-self:flex-start}.product-card h3+p:not(.product-status){margin-bottom:18px}
+.product-card p.product-fact{font-size:12px;line-height:1.75;color:#d2c4df;margin-top:auto;padding-top:16px;border-top:1px solid #c4a4e21a}
+.product-card p.product-note{font-size:11px;line-height:1.7;color:#9c88ad;margin-top:10px}
