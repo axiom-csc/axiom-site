@@ -11,6 +11,7 @@ from fontTools.pens.transformPen import TransformPen
 
 SRC="font/Newsreader.ttf"; OUT=sys.argv[1]
 TRACK=-0.015   # em; "slightly tightened"
+DOT=1.12       # dot radius relative to Newsreader's period (enlarged 12%, 2026-11-17)
 
 def instance(opsz):
     f=TTFont(SRC); return instantiateVariableFont(f,{"wght":600,"opsz":opsz})
@@ -42,7 +43,7 @@ def build(text,opsz,dot_scale=1.0):
     return dict(path=pen.getCommands(),cx=cx,cy=cy,r=r,xmin=min(txmin,0),xmax=cx+r,top=-tymax,bottom=max(-tymin,cy+r),upm=upm)
 
 def wordmark(fg,dot,title,path):
-    d=build("tenthlook",72); pad=40
+    d=build("tenthlook",72,DOT); pad=40
     x0=d["xmin"]-pad; y0=d["top"]-pad; w=d["xmax"]-d["xmin"]+2*pad; h=d["bottom"]-d["top"]+2*pad
     svg=(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x0:.0f} {y0:.0f} {w:.0f} {h:.0f}" role="img" aria-label="{title}">'
          f'<title>{title}</title><path fill="{fg}" d="{d["path"]}"/>'
@@ -50,7 +51,7 @@ def wordmark(fg,dot,title,path):
     open(path,"w").write(svg); print(path,round(w),round(h),"dot r",round(d["r"]))
 
 def icon(path,dot_scale=1.0,bg="#100e16",fg="#FAFAF7",dot="#9b8cff",radius=0.22):
-    d=build("t",72,dot_scale)
+    d=build("t",72,DOT*dot_scale)
     gw=d["xmax"]-d["xmin"]; gh=d["bottom"]-d["top"]
     size=max(gw,gh)/0.62     # glyph group fills ~62% of the tile
     cx=(d["xmin"]+d["xmax"])/2; cy=(d["top"]+d["bottom"])/2

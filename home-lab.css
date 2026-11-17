@@ -63,7 +63,6 @@
 .product-status{display:inline-block;font-size:10px;line-height:1;letter-spacing:.02em;color:#dccbef;padding:6px 9px;border:1px solid #c4a4e22e;border-radius:20px;margin:0 0 20px}
 .product-card h3{font-size:22px;font-weight:450;letter-spacing:-.025em;line-height:1.3;margin:0 0 12px;color:#e6dcf0}
 .product-card p:not(.product-status){font-size:13px;line-height:1.85;color:#aa96b9;margin:0}
-.name-note{padding:10px var(--gutter) 30px;font-size:12px;color:#9c88ad;margin:0}
-.name-note span{color:#cbb9dc;margin-right:10px}
 @media(max-width:1100px){.product-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.products{padding:28px 24px 35px}.products-heading{display:block;margin-bottom:22px}.products-heading h2{font-size:22px}.products-heading p{font-size:11px;margin-top:8px}.product-grid{grid-template-columns:1fr;gap:14px}.product-card{padding:20px}.product-card h3{font-size:21px}.name-note{padding:5px 24px 25px;font-size:11px}.name-note span{display:block;margin-bottom:4px}}
+@media(max-width:700px){.products{padding:28px 24px 35px}.products-heading{display:block;margin-bottom:22px}.products-heading h2{font-size:22px}.products-heading p{font-size:11px;margin-top:8px}.product-grid{grid-template-columns:1fr;gap:14px}.product-card{padding:20px}.product-card h3{font-size:21px}}
+.home .astral-hero h1 .accent-dot{color:#9b8cff}

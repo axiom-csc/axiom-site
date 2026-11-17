@@ -7,5 +7,5 @@
 - `icon-{16,32,48,128,180,512}.png`, `/favicon.ico` (16/32/48), `/apple-touch-icon.png` (180).
 
 Letterforms are Newsreader SemiBold (wght 600, opsz 72), shaped with HarfBuzz at -0.015em tracking and
-converted to outlines, so the SVGs need no font. The dot is an SVG circle sized and placed from Newsreader's
-own period glyph. Newsreader is licensed under the SIL Open Font License 1.1 (`NEWSREADER-OFL.txt`).
+converted to outlines, so the SVGs need no font. The dot is an SVG circle sized from Newsreader's
+own period glyph, enlarged 12% (icon-small: a further 1.45x). Newsreader is licensed under the SIL Open Font License 1.1 (`NEWSREADER-OFL.txt`).
