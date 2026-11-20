@@ -1,4 +1,4 @@
-"""Build Tenthlook logo SVGs: Newsreader SemiBold outlines + a real circle dot."""
+"""Build Tenthlook logo SVGs: Newsreader Regular outlines + a real circle dot."""
 # Usage: python scripts/make-logo.py <outdir>, run from a directory containing font/Newsreader.ttf
 # (Newsreader[opsz,wght].ttf from github.com/google/fonts/tree/main/ofl/newsreader). Needs fonttools, uharfbuzz.
 # Coordinates were then rounded to 0.1 units for file size.
@@ -14,11 +14,11 @@ TRACK=-0.015   # em; "slightly tightened"
 DOT=1.12       # dot radius relative to Newsreader's period (enlarged 12%, 2026-11-17)
 
 def instance(opsz):
-    f=TTFont(SRC); return instantiateVariableFont(f,{"wght":600,"opsz":opsz})
+    f=TTFont(SRC); return instantiateVariableFont(f,{"wght":400,"opsz":opsz})
 
 def shape(text,opsz):
     blob=hb.Blob.from_file_path(SRC); face=hb.Face(blob); font=hb.Font(face)
-    font.set_variations({"wght":600,"opsz":opsz})
+    font.set_variations({"wght":400,"opsz":opsz})
     buf=hb.Buffer(); buf.add_str(text); buf.guess_segment_properties()
     hb.shape(font,buf,{"kern":True,"liga":False})
     return [(i.codepoint,p.x_advance,p.x_offset,p.y_offset) for i,p in zip(buf.glyph_infos,buf.glyph_positions)]
