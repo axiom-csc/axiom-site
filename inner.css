@@ -1,0 +1,276 @@
+/* Light-theme layer for inner pages. Colour overrides derived from site.css + subpages.css, plus explicit header/band rules. Loaded last. */
+/* derived from site.css */
+a:hover{color:#0d1020}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid rgba(65,105,225,.38)}
+.site-header nav a{color:#4b5266}
+.site-header nav a:hover,.site-header nav a[aria-current]{color:#0d1020}
+.eyebrow{color:#4b5266}
+.text-link{border-bottom:1px solid rgba(65,105,225,0.240)}
+.text-link:hover{border-color:rgba(65,105,225,.38)}
+.subtle-link{color:#4b5266}
+.quiet-label{color:#4b5266}
+.eclipse svg{stroke:#4b5266}
+.eclipse-light{background:radial-gradient(circle,rgba(65,105,225,0.140) 35%,rgba(65,105,225,0.140) 45%,transparent 68%)}
+.eclipse-core{background:#eef2ff;box-shadow:0 -1px 2px rgba(65,105,225,0.240),1px 0 20px rgba(65,105,225,0.240),-18px 3px 50px rgba(65,105,225,0.184)}
+.home-manam{background:radial-gradient(ellipse at 0 100%,rgba(65,105,225,0.140),transparent 60%),#eef2ff}
+.feature-deck{color:#0d1020}
+.section-heading>a{color:#4b5266}
+.row-arrow{color:#4b5266}
+.site-footer>div{color:#4b5266}
+.back-link{color:#4b5266}
+.article-nav>a{color:#4b5266}
+.article-nav>a:hover{color:#0d1020}
+.prose h3{color:#0d1020}
+.prose a{color:#0d1020}
+.prose pre{color:#0d1020}
+.prose p>code{color:#0d1020}
+.system-diagram>div{border-left:1px solid rgba(65,105,225,.38);color:#0d1020}
+.system-diagram>div>span{color:#4b5266}
+.system-diagram figcaption{color:#4b5266}
+.research-row>span:last-child{color:#4b5266}
+.publication>span{color:#4b5266}
+.publication>b{color:#4b5266}
+.email-form label{color:#4b5266}
+.email-form input{border-bottom:1px solid rgba(65,105,225,0.240);color:#0d1020}
+.email-form button{border-bottom:1px solid rgba(65,105,225,0.240);color:#0d1020}
+.methodology dt{color:#4b5266}
+.methodology dd{color:#0d1020}
+.methodology .status{color:#0d1020}
+.methodology summary{color:#0d1020}
+.pmap-label{color:#4b5266}
+.pmap-org{color:#4b5266}
+.pmap-meta{color:#4b5266}
+@media(max-width:700px){.site-header nav{background:#eef2ff}}
+.index-heading>a{color:#4b5266}
+.lead-project>.quiet-label{color:#4b5266}
+.companion-projects h3>span{color:#4b5266}
+.companion-projects .quiet-label{color:#4b5266}
+.latest-heading>a{color:#4b5266}
+.latest-item .quiet-label{color:#4b5266}
+.latest-item h4{color:#0d1020}
+.research-rail{background:#eef2ff}
+.rail-heading p{color:#4b5266}
+.wordmark{color:#0d1020}
+.eclipse-core{background:#eef2ff;box-shadow:0 -1px 2px rgba(65,105,225,0.240),1px 0 22px rgba(65,105,225,0.169),-18px 3px 50px rgba(65,105,225,0.148)}
+.home .hero h1{color:#0d1020}
+.index-heading h2{color:#4b5266}
+.lead-project>h3{color:#0d1020}
+.lead-project>p{color:#4b5266}
+.lead-project>.quiet-label,.latest-item .quiet-label{color:#4b5266}
+.companion-projects h3{color:#0d1020}
+.companion-projects p,.latest-item p{color:#4b5266}
+.companion-projects .quiet-label{color:#4b5266}
+.latest-heading h3{color:#4b5266}
+.latest-item h4{color:#0d1020}
+.rail-heading h2{color:#0d1020}
+.rail-heading p{color:#4b5266}
+.area-columns h3{color:#0d1020}
+.area-columns p{color:#4b5266}
+.site-footer .wordmark{color:#0d1020}
+.site-footer>div{color:#4b5266}
+.site-footer>p{color:#4b5266}
+.link-arrow{color:#4b5266}
+.text-link{border-color:rgba(65,105,225,0.240);color:#0d1020}
+a:hover .link-arrow{color:#0d1020}
+.page-heading,.prose>section,.research-row,.publication{border-color:rgba(65,105,225,0.113)}
+.research-menu summary{color:#4b5266}
+.research-menu summary>span{color:#4b5266}
+.research-menu[open] summary,.research-menu summary:hover{color:#0d1020}
+.research-menu-content{background:rgba(65,105,225,0.140);border:1px solid rgba(65,105,225,0.184)}
+.site-header nav .research-menu-content a{color:#4b5266}
+.site-header nav .research-menu-content .menu-overview{color:#0d1020;border-bottom:1px solid rgba(65,105,225,0.141)}
+.site-header nav .research-menu-content .menu-overview span{color:#4b5266}
+.article-byline{color:#4b5266}
+.related-research h2{color:#0d1020}
+.related-research a{color:#4b5266}
+.footer-identity>p{color:#4b5266}
+.footer-navigation>div{color:#4b5266}
+/* derived from subpages.css */
+.paper-page{background:var(--pale)}
+.paper-page .wordmark,.paper-page .site-footer .wordmark{color:#0d1020}
+.paper-page .site-header nav a,.paper-page .research-menu summary,.paper-page .menu-toggle{color:#4b5266}
+.paper-page .site-header nav a:hover,.paper-page .site-header nav a[aria-current],.paper-page .research-menu summary:hover{color:#0d1020}
+.paper-page .research-menu-content{background:rgba(65,105,225,0.140);border-color:rgba(65,105,225,0.148);box-shadow:0 16px 40px rgba(65,105,225,0.092)}
+.paper-page .site-header nav .research-menu-content a{color:#4b5266}
+.paper-page .site-header nav .research-menu-content .menu-overview{color:#0d1020;border-color:rgba(65,105,225,0.148)}
+.paper-page .research-menu summary>span,.paper-page .menu-overview span{color:#4b5266}
+.paper-page a:focus-visible,.paper-page summary:focus-visible,.paper-page button:focus-visible,.paper-page input:focus-visible{outline-color:rgba(65,105,225,0.240)}
+.paper-page .site-footer{border-top:1px solid rgba(65,105,225,0.148)}
+.paper-page .footer-identity>p,.paper-page .footer-navigation>div,.paper-page .site-footer>.footer-fine{color:#4b5266}
+.paper-page .site-footer a:hover{color:#0d1020}
+.paper-page .prose h2{color:#0d1020}
+.paper-page .prose h3{color:#0d1020}
+.paper-page .prose p{color:#4b5266}
+.paper-page .prose a{color:#4b5266;text-decoration-color:rgba(65,105,225,0.500)}
+.paper-page .prose a:hover{color:#0d1020}
+.paper-page .prose pre{background:#eef2ff;color:#0d1020}
+.paper-page .prose p>code{color:#4b5266}
+.article-back{color:#4b5266}
+.editorial-category{color:#4b5266}
+.editorial-heading h1{color:#0d1020}
+.editorial-deck{color:#4b5266}
+.method-figure{background:#eef2ff}
+.method-steps>div+div::before{color:#4b5266}
+.method-steps>div>span{color:#0d1020}
+.method-steps p{color:#4b5266}
+.method-figure figcaption{color:#4b5266}
+.code-figure{background:#eef2ff}
+.figure-label{color:#4b5266}
+.code-figure pre{color:#0d1020}
+.code-output{color:#4b5266}
+.code-figure>div>p:not(.code-output){color:#4b5266}
+.editorial-sidebar dt{color:#4b5266}
+.editorial-sidebar dd{color:#4b5266}
+.article-contents summary{color:#4b5266}
+.article-contents summary::after{color:#4b5266}
+.article-contents nav a{color:#4b5266}
+.article-contents nav a:hover{color:#0d1020}
+.editorial-prose>section:first-child>p:first-of-type{color:#0d1020}
+.paper-page .related-research h2{color:#0d1020}
+.paper-page .related-research a{color:#4b5266}
+.paper-page .related-research a span{color:#4b5266}
+.project-page{background:var(--pale)}
+.project-heading>p:first-child{color:#4b5266}
+.project-deck{color:#0d1020}
+.project-links{color:#0d1020}
+.project-links a{border-bottom:1px solid rgba(65,105,225,0.240)}
+.project-architecture{background:#eef2ff;color:#0d1020}
+.project-worlds{color:#4b5266}
+.project-join{border-top:1px solid rgba(65,105,225,0.240)}
+.project-join::after{background:rgba(65,105,225,0.140)}
+.project-shared{color:#0d1020}
+.project-shared small{color:#4b5266}
+.project-stages h3{color:#4b5266}
+.project-stages p{color:#4b5266}
+.project-architecture figcaption{color:#4b5266}
+.project-overview>p{color:#0d1020}
+.project-overview>div>p:first-child{color:#0d1020}
+.project-overview>div>p:last-child{color:#4b5266}
+.project-prose h2{color:#0d1020}
+.project-prose p{color:#0d1020}
+.project-prose a{color:#0d1020}
+.project-page .related-research h2{color:#0d1020}
+.project-page .related-research a{color:#4b5266}
+.technical-heading h1{color:#0d1020}
+.technical-version{color:#4b5266}
+.dataset-facts{background:#eef2ff}
+.dataset-facts strong{color:#4b5266}
+.dataset-facts span{color:#4b5266}
+.document-label{color:#4b5266}
+.document-contents a{color:#4b5266}
+.document-status{color:#4b5266}
+.paper-page .methodology dt{color:#4b5266}
+.paper-page .methodology dd{color:#4b5266}
+.paper-page .methodology .status,.paper-page .methodology .rl-link{color:#4b5266}
+.paper-page .methodology details{border-color:rgba(65,105,225,0.240)}
+.paper-page .methodology summary{color:#4b5266}
+.paper-page .methodology .pmap-meta{color:#4b5266}
+.paper-page .methodology .pmap-text{color:#4b5266}
+.paper-page .methodology .pmap-org,.paper-page .methodology .pmap-label{color:#4b5266}
+.paper-page .methodology .pmap-turn{border-color:rgba(65,105,225,0.191)}
+.archive-heading h1{color:#0d1020}
+.archive-heading>p:last-child{color:#4b5266}
+.archive-toolbar button{color:#4b5266}
+.archive-toolbar button[aria-pressed=true]{border-color:rgba(65,105,225,0.240);color:#0d1020}
+.publication-search{color:#4b5266;border-bottom:1px solid rgba(65,105,225,0.240)}
+.publication-search::placeholder{color:#4b5266}
+.archive-labels{color:#4b5266;border-bottom:1px solid rgba(65,105,225,0.240)}
+.paper-page .archive .publication{border-color:rgba(65,105,225,0.219)}
+.paper-page .archive .publication h2{color:#4b5266}
+.paper-page .archive .publication>span{color:#4b5266}
+.paper-page .archive .publication p{color:#4b5266}
+.paper-page .archive .publication>b{color:#4b5266}
+.paper-page .archive .authorship{color:#4b5266}
+.archive-empty{color:#4b5266}
+.about-heading h1{color:#0d1020}
+.about-heading>p:last-child{color:#4b5266}
+.about-premise{background:#eef2ff}
+.about-premise h2{color:#4b5266}
+.about-premise>div>p{color:#4b5266}
+.about-premise a{color:#4b5266}
+.paper-page .about-layout h2{color:#4b5266}
+.paper-page .about-layout h3{color:#4b5266}
+.paper-page .about-layout p{color:#4b5266}
+.paper-page .quiet-label{color:#4b5266}
+.paper-page .inline-links a,.paper-page .about-layout .text-link{color:#4b5266}
+.paper-page .text-link{border-color:rgba(65,105,225,0.240)}
+.paper-page .email-form label{color:#4b5266}
+.paper-page .email-form input,.paper-page .email-form button{color:#4b5266;border-color:rgba(65,105,225,0.240)}
+.paper-page .email-form input::placeholder{color:#4b5266}
+.legal-page .privacy-main h1{color:#0d1020}
+.directory-page{background:var(--pale)}
+.directory-heading>p:first-child{color:#4b5266}
+.directory-heading h1{color:#0d1020}
+.directory-heading>p:last-child{color:#0d1020}
+.directory-topics{color:#4b5266}
+.directory-page .library-heading h2{color:#0d1020}
+.directory-page .library-heading>a{color:#4b5266}
+.directory-page .category-filters button{color:#4b5266}
+.directory-page .category-filters button[aria-pressed=true]{color:#0d1020;border-color:rgba(65,105,225,0.240)}
+.directory-page .library-search input{border-bottom:1px solid rgba(65,105,225,0.240);color:#0d1020}
+.directory-page .library-search input::placeholder{color:#4b5266}
+.directory-page .library-count{color:#4b5266}
+.directory-page .entry-meta{color:#4b5266}
+.directory-page .entry-meta span+span{color:#4b5266}
+.directory-page .research-entry h3{color:#0d1020}
+.directory-page .research-entry h3 span{color:#4b5266}
+.directory-page .research-entry>p:not(.entry-meta){color:#4b5266}
+.directory-page .empty-results{color:#4b5266}
+@media(max-width:700px){.paper-page .site-header nav.open{background:#eef2ff;border-color:rgba(65,105,225,0.184)}
+.editorial-sidebar dd{color:#4b5266}
+.paper-page .about-layout section+section{border-color:rgba(65,105,225,0.240)}}
+.paper-page .editorial-category,.paper-page .article-back{color:#4b5266}
+.paper-page .editorial-sidebar dt{color:#4b5266}
+.paper-page .editorial-sidebar dd,.paper-page .article-contents nav a{color:#4b5266}
+.paper-page .method-figure figcaption,.paper-page .dataset-facts span{color:#4b5266}
+.paper-page .figure-label,.paper-page .code-figure>div>p:not(.code-output){color:#4b5266}
+.paper-page .document-status,.paper-page .document-contents a{color:#4b5266}
+.paper-page .technical-version,.paper-page .archive .publication>span{color:#4b5266}
+.paper-page .archive-labels,.paper-page .archive .authorship{color:#4b5266}
+.paper-page .about-premise>div>p,.paper-page .about-layout p{color:#4b5266}
+.project-architecture figcaption{color:#4b5266}
+@media(max-width:700px){.paper-page .editorial-sidebar dd{color:#4b5266}}
+.project-authorship{color:#4b5266}
+.project-prose #premise p:first-of-type{color:#0d1020}
+.project-prose #status h2{color:#0d1020}
+.project-prose #status p{color:#4b5266}
+.results-intro{color:#4b5266}
+.result-item h3{color:#0d1020}
+.result-item>p:not(.entry-meta){color:#4b5266}
+.under-the-hood{border-top:1px solid rgba(65,105,225,0.141)}
+.under-the-hood h2{color:#0d1020}
+.under-the-hood>p{color:#4b5266}
+.under-the-hood li{color:#4b5266}
+.under-the-hood li a{color:#0d1020}
+
+/* ---- Explicit overrides: header, heading bands, panels, links ---- */
+body.inner-page{--bg:var(--pale);--ink:#0d1020;--muted:#4b5266;--accent:#4169e1;--line:rgba(65,105,225,.2);background:var(--pale);color:var(--ink);font-family:var(--sans)}
+body.inner-page .site-header{position:relative;background:var(--navy);padding:20px var(--gutter)}
+body.inner-page .site-header nav a,body.inner-page .research-menu summary,body.inner-page .menu-toggle{color:#fff}
+body.inner-page .site-header nav a:hover,body.inner-page .site-header nav a[aria-current]{background:rgba(255,255,255,.16);color:#fff}
+body.inner-page .site-header nav a:last-child{background:var(--mist);color:var(--navy)}
+body.inner-page .site-header nav a:last-child:hover{background:#c9d8fb;color:var(--navy)}
+body.inner-page .research-menu-content{background:var(--navy);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+body.inner-page .site-header nav .research-menu-content a{color:#dbe5ff;background:none}
+body.inner-page .site-header nav .research-menu-content .menu-overview{color:#fff;border-color:rgba(255,255,255,.14)}
+body.inner-page .site-header nav.open{background:var(--navy);border-color:rgba(255,255,255,.12)}
+/* Heading bands: the dark blue part of the alternation */
+body.inner-page :is(.about-heading,.technical-heading,.editorial-heading,.project-heading,.directory-heading,.archive-heading,.page-heading){background:linear-gradient(180deg,#070a1c,#122070);color:#fff}
+body.inner-page :is(.about-heading,.technical-heading,.editorial-heading,.project-heading,.directory-heading,.archive-heading,.page-heading) :is(p,a,span,li,small,div){color:#c9d6f5}
+body.inner-page :is(.about-heading,.technical-heading,.editorial-heading,.project-heading,.directory-heading,.archive-heading,.page-heading) :is(h1,h2){color:#fff}
+body.inner-page :is(.project-links,.directory-topics) a{border-color:rgba(255,255,255,.35)}
+body.inner-page .directory-topics{background:#122070;margin:0;padding-top:0;padding-bottom:34px}
+body.inner-page .directory-topics a{color:#dbe5ff}
+/* Panels as soft rounded cards */
+body.inner-page :is(.method-figure,.dataset-facts,.code-figure,.project-architecture,.about-premise){border-radius:var(--radius)}
+body.inner-page .about-premise{margin:0 var(--gutter)}
+body.inner-page .prose pre,body.inner-page .methodology details{border-radius:14px}
+body.inner-page .prose a{color:#2a48b8}
+body.inner-page .prose a:hover{color:#0d1020}
+body.inner-page :is(a,button,summary,input):focus-visible{outline:3px solid #4169e1;outline-offset:3px}
+body.inner-page .footer-fine,body.inner-page .site-footer{border-color:var(--line)}
+/* Full-bleed bands (editorial pages cap the heading at 1120px; keep the text width, not the colour) */
+body.inner-page .editorial-heading{max-width:none;margin:0;padding-left:max(var(--gutter),calc((100% - 1120px)/2));padding-right:max(var(--gutter),calc((100% - 1120px)/2))}
+/* Breathing room between the band and the first panel */
+body.inner-page :is(.method-figure,.dataset-facts,.project-architecture,.about-premise){margin-top:36px}
+body.inner-page .editorial-heading+.method-figure,body.inner-page .editorial-heading+.editorial-layout{margin-top:36px}
